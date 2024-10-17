@@ -1,9 +1,9 @@
 import { MongoClient, Db, Collection } from "mongodb";
-import { Room } from "../interfaces/Room.js";
+import { Room } from "../../interfaces/Room.js";
 
 const con: string | undefined = process.env.CONNECTION_STRING;
 
-export async function connect(): Promise<[Collection<Room>, MongoClient]> {
+export async function roomConnect(): Promise<[Collection<Room>, MongoClient]> {
   if (!con) {
     console.log("No connection string, check your .env file!");
     throw new Error("No connection string");

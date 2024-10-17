@@ -1,9 +1,9 @@
 import { Collection, MongoClient, WithId } from "mongodb";
 import { User } from "../../interfaces/User.js";
-import { connect } from "../userConnection.js";
+import { userConnect } from "../Connection/userConnection.js";
 
 async function searchUser(search: string): Promise<WithId<User>[]> {
-  const [col, client]: [Collection<User>, MongoClient] = await connect();
+  const [col, client]: [Collection<User>, MongoClient] = await userConnect();
   const searchterm = search
     .split(" ")
     .map((term) => term.trim())

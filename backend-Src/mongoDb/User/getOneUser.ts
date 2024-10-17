@@ -1,10 +1,10 @@
 import { MongoClient, Collection, WithId, ObjectId, FindCursor } from "mongodb";
 import { User } from "../../interfaces/User.js";
-import { connect } from "../userConnection.js";
+import { userConnect } from "../Connection/userConnection.js";
 
 async function getOneUser(id: ObjectId): Promise<WithId<User>[]> {
   try {
-    const [col, client]: [Collection<User>, MongoClient] = await connect();
+    const [col, client]: [Collection<User>, MongoClient] = await userConnect();
     const filter = { _id: id };
     const crusor: FindCursor<WithId<User>> = col.find(filter);
     const found: WithId<User>[] = await crusor.toArray();

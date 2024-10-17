@@ -3,6 +3,7 @@ import { ObjectId, WithId } from "mongodb";
 import { User } from "../interfaces/User.js";
 import { getAllUser } from "../mongoDb/User/getAllUser.js";
 import { getOneUser } from "../mongoDb/User/getOneUser.js";
+import { searchUser } from "../mongoDb/User/searchUser.js";
 
 export const router: Router = express.Router();
 
@@ -15,6 +16,24 @@ router.get("/", async (_, res: Response<WithId<User>[]>) => {
     res.send(users);
   } catch (error) {
     res.sendStatus(500);
+  }
+});
+
+router.get("/search", async (req, res) => {
+  const name: string = req.query.q as string;
+  if (!name.trim()) {
+    res.status(400);
+  }
+  try {
+    const searchResult = await searchUser(name);
+    if (searchResult.length === 0) {
+      res.status(404).send("No user found");
+    } else {
+      res.json(searchResult);
+    }
+  } catch (error) {
+    console.error("Error fetching user", error);
+    res.status(500);
   }
 });
 

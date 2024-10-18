@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-export interface DmMessage {
+export interface Dm {
   textMessage: string;
   reciverId: ObjectId;
   senderId: ObjectId;

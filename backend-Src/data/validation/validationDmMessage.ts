@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { DmMessage } from "../../interfaces/DmMessage.js";
+import { Dm } from "../../interfaces/Dm.js";
 
 export const DmMessageSchema = Joi.defaults((schema) => {
   return schema.required();
@@ -9,7 +9,7 @@ export const DmMessageSchema = Joi.defaults((schema) => {
   senderId: Joi.string().length(24).hex(),
 });
 
-export function isValidDm(Dm: DmMessage): boolean {
+export function isValidDm(Dm: Dm): boolean {
   let result = DmMessageSchema.validate(Dm);
   return !result.error;
 }

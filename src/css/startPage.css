@@ -1,0 +1,31 @@
+:root {
+  --text-color: white;
+  --button-color: #618e75;
+  --div-colour: #7da38d;
+  --text: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.start-page-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  background-color: #618e75;
+  color: var(--text-color);
+  font-family: var(--text);
+
+  font-size: 18px;
+  padding: 0.4em;
+  margin: 0.7em;
+  border-radius: 0.6em;
+  width: 9em;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color);
+}

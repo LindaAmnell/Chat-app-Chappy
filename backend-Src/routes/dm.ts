@@ -1,12 +1,12 @@
 import express, { Request, Response, Router } from "express";
-import { DmMessage } from "../interfaces/DmMessage.js";
-import { creatDm } from "../mongoDb/DmMessage/creatDm.js";
+import { Dm } from "../interfaces/Dm.js";
+import { creatDm } from "../mongoDb/Dm/creatDm.js";
 import { isValidDm } from "../data/validation/validationDmMessage.js";
 
 export const router: Router = express.Router();
 
 router.post("/", async (req: Request, res: Response) => {
-  const newDm: DmMessage = req.body;
+  const newDm: Dm = req.body;
 
   if (isValidDm(newDm)) {
     try {

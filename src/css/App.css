@@ -1,0 +1,42 @@
+body {
+  box-sizing: 0;
+  margin: 0;
+}
+
+:root {
+  --text-color: white;
+  --background-color: #a5c0b1;
+  --button-color: #618e75;
+  --header-text: "Londrina Shadow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header {
+  font-family: var(--header-text);
+  font-size: 80px;
+  margin-bottom: 1em;
+  place-self: center;
+  display: grid;
+  place-items: center;
+}
+section {
+  height: 100vh;
+}
+
+.dragon-start-page {
+  height: 15em;
+  align-self: center;
+}
+
+.dragon-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,67 @@
+:root {
+  --text-color: white;
+  --background-color: #a5c0b1;
+  --button-color: #618e75;
+  --header-text: "Londrina Shadow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  --text: "Love Ya Like A Sister", cursive;
+  font-style: normal;
+  --div-color: #7da38d;
+}
+.chat-page {
+  display: flex;
+}
+
+.chappy-chat-page {
+  height: 6em;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
+h2 {
+  font-family: var(--text);
+  color: var(--text-color);
+
+  font-weight: 100;
+  font-size: 30px;
+  margin: 0em;
+  padding: 0.5em;
+}
+.side-bar {
+  background-color: var(--div-color);
+  height: 85.3vh;
+  border-radius: 0 10px 0 0;
+  border: solid 1px black;
+}
+.div-room {
+  height: 45vh;
+  border-bottom: solid 1px black;
+}
+.rooms {
+  display: flex;
+  margin: 0.4em;
+  padding-right: 1em;
+}
+.room-image {
+  height: 2em;
+  border-radius: 10em;
+  width: 2em;
+  margin-right: 0.5em;
+}
+.room-name {
+  margin: 0em;
+  place-self: center;
+  font-family: var(--text);
+  color: var(--text-color);
+  font-size: 18px;
+}
+.div-dm {
+  height: 40vh;
+  display: flex;
+}
+.sign-out-btn {
+  place-self: end;
+  margin-bottom: 4em;
+  width: 8em;
+}

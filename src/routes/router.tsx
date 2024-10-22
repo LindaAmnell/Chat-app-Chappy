@@ -3,6 +3,7 @@ import Root from "./Root.jsx";
 import App from "../App.js";
 import { LoginPage } from "../components/LoginPage.js";
 import { NewUser } from "../components/NewUser.js";
+import { ChatPage } from "../components/ChatPage.js";
 
 const router = createHashRouter([
   {
@@ -20,6 +21,10 @@ const router = createHashRouter([
       {
         path: "/newUser",
         element: <NewUser />,
+      },
+      {
+        path: "/chatPage",
+        element: <ChatPage />,
       },
     ],
   },

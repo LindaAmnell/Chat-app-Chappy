@@ -1,6 +1,10 @@
 body {
   box-sizing: 0;
   margin: 0;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 :root {
@@ -12,27 +16,19 @@ body {
   font-style: normal;
 }
 
-body {
-  background-color: var(--background-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 header {
   font-family: var(--header-text);
   font-size: 80px;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   place-self: center;
   display: grid;
   place-items: center;
-}
-section {
-  height: 100vh;
 }
 
 .dragon-start-page {
   height: 15em;
   align-self: center;
+  margin-top: 3em;
 }
 
 .dragon-div {

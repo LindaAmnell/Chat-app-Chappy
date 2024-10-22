@@ -1,14 +1,18 @@
 import express, { Response, Router, Request } from "express";
 import { ObjectId, WithId } from "mongodb";
 import { User } from "../interfaces/User.js";
+import jwt from "jsonwebtoken";
 import { getAllUser } from "../mongoDb/User/getAllUser.js";
 import { getOneUser } from "../mongoDb/User/getOneUser.js";
 import { searchUser } from "../mongoDb/User/searchUser.js";
 import { isValidUser } from "../data/validation/validationUser.js";
 import { creatUser } from "../mongoDb/User/creatUser.js";
 import { deleteUser } from "../mongoDb/User/deleteUser.js";
+import { validateLogin } from "../data/validation/validateLogin.js";
 
 export const router: Router = express.Router();
+
+const { sign } = jwt;
 
 router.get("/", async (_, res: Response<WithId<User>[]>) => {
   try {
@@ -20,6 +24,30 @@ router.get("/", async (_, res: Response<WithId<User>[]>) => {
   } catch (error) {
     res.sendStatus(500);
   }
+});
+
+router.post("/login", async (req: Request, res: Response) => {
+  console.log("går in i post");
+  if (!process.env.SECRET) {
+    res.sendStatus(500);
+    return;
+  }
+  console.log("Body är: ", req.body);
+  const userId = await validateLogin(req.body.username, req.body.password);
+  console.log("user id: ", userId);
+
+  if (!userId) {
+    res.status(401).send({
+      error: "Unauthorized",
+      message: "You are not authorized to access this resource.",
+    });
+    return;
+  }
+  const payload = {
+    userId,
+  };
+  const token: string = sign(payload, process.env.SECRET);
+  res.send({ jwt: token });
 });
 
 router.get("/search", async (req, res) => {

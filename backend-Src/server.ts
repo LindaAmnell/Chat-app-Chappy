@@ -3,7 +3,7 @@ import { router as userRouter } from "./routes/user.js";
 import { router as roomRouter } from "./routes/room.js";
 import { router as dmRouter } from "./routes/dm.js";
 
-const port: number = Number(process.env.PORT || 1234);
+const port: number = Number(process.env.PORT || 1989);
 const app: Express = express();
 
 app.use("/", express.json());

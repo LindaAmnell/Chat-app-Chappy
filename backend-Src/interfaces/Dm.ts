@@ -1,8 +1,6 @@
-import { ObjectId } from "mongodb";
-
 export interface Dm {
   textMessage: string;
-  reciverId: ObjectId;
-  senderId: ObjectId;
+  receiverName: string;
+  senderName: string;
   date: Date;
 }

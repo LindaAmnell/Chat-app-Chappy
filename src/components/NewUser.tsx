@@ -16,7 +16,7 @@ const NewUser = () => {
         <input type="text" />
         <label>Image</label>
         <input type="text" />
-        <button>Sign in</button>
+        <button className="creat-btn">Creat new user</button>
       </div>
       <div className="dragon-div">
         <img className="chappy-login-page" src={chappyDragon} alt="" />

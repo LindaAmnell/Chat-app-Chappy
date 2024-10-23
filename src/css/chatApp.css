@@ -10,11 +10,12 @@
   --div-color: #7da38d;
 }
 .chat-page {
-  display: flex;
+  display: grid;
+  place-items: center;
 }
 
 .chappy-chat-page {
-  height: 6em;
+  height: 4em;
   position: absolute;
   top: 1%;
   left: 1%;
@@ -26,17 +27,16 @@ h2 {
   font-weight: 100;
   font-size: 30px;
   margin: 0em;
-  padding: 0.5em;
 }
 .side-bar {
   background-color: var(--div-color);
-  height: 85.3vh;
-  border-radius: 0 10px 0 0;
+  border-radius: 0.5em 0.5em 0 0;
   border: solid 1px black;
+  height: 82vh;
 }
 .div-room {
-  height: 45vh;
   border-bottom: solid 1px black;
+  padding: 0.5em;
 }
 .rooms {
   display: flex;
@@ -57,11 +57,30 @@ h2 {
   font-size: 18px;
 }
 .div-dm {
-  height: 40vh;
   display: flex;
+  flex-direction: column;
+  height: 39vh;
+  justify-content: space-between;
+  padding: 0.5em;
 }
 .sign-out-btn {
-  place-self: end;
-  margin-bottom: 4em;
   width: 8em;
+}
+.sign-user-div {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sign-in-name {
+  color: var(--text-color);
+  font-family: var(--text);
+  font-size: 20px;
+  margin: 0.4em;
+}
+
+.user-name {
+  color: var(--text-color);
+  font-family: var(--text);
+  margin: 0.4em;
 }

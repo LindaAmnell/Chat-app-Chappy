@@ -1,4 +1,4 @@
-import { Room } from "../models/Room";
+import { Room } from "../../models/Room";
 
 async function getRooms(): Promise<Room[]> {
   const response: Response = await fetch("/api/room", { method: "GET" });

@@ -30,18 +30,21 @@ label {
 input {
   background-color: var(--button-color);
   padding: 0.6em;
-  margin-bottom: 1.3em;
+  margin-bottom: 1em;
   border-radius: 0.5em;
   border: solid 1px var(--background-color);
 }
 .chappy-login-page {
-  height: 15em;
-  margin-top: 3em;
+  height: 10em;
+  margin-top: 1em;
 }
 
 .back-arrow {
   height: 3em;
   position: absolute;
-  top: 100px;
-  left: 10%;
+  top: 10%;
+  left: 7%;
+}
+.creat-btn {
+  margin-top: 1em;
 }

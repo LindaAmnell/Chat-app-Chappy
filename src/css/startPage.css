@@ -17,12 +17,15 @@ button {
   background-color: #618e75;
   color: var(--text-color);
   font-family: var(--text);
-
   font-size: 18px;
   padding: 0.4em;
-  margin: 0.7em;
   border-radius: 0.6em;
   width: 9em;
+}
+.new-user-btn,
+.sign-btn,
+.sign-guset-btn {
+  margin: 0.4em;
 }
 
 .nav-link {

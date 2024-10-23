@@ -1,6 +1,7 @@
 export interface Dm {
+  _id: string;
   textMessage: string;
-  //   reciverId: ObjectId;
-  //   senderId: ObjectId;
-  date: Date;
+  receiverName: string;
+  senderName: string;
+  //   date: Date;
 }

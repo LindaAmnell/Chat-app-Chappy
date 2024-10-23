@@ -3,12 +3,15 @@ import { useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
 import backArrow from "../images/back.png";
+import { useChappystore } from "../data/store.ts";
 const LS_KEY = "JWT-DEMO--TOKEN";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  const setUsername = useChappystore((state) => state.setUsername);
+  const username = useChappystore((state) => state.username);
 
   async function handleLogin() {
     const data = { username, password };
@@ -27,8 +30,10 @@ const LoginPage = () => {
     }
 
     const token = await response.json();
-    localStorage.setItem(LS_KEY, token.jwt);
+    console.log("Token från servern:", token.jwt); // Logga token för att se om den kommer tillbaka
+    localStorage.setItem(LS_KEY, token.jwt); // Se till att du använder samma nyckel
     setIsLoggedIn(true);
+    setUsername(username);
   }
   if (isLoggedIn) {
     return <Navigate to="/chatPage" replace />;
@@ -45,7 +50,9 @@ const LoginPage = () => {
         <input onChange={(e) => setUsername(e.target.value)} type="text" />
         <label>Password</label>
         <input onChange={(e) => setPassword(e.target.value)} type="text" />
-        <button onClick={handleLogin}>Sign in</button>
+        <button className="login-btn" onClick={handleLogin}>
+          Sign in
+        </button>
       </div>
       <div className="dragon-div">
         <img className="chappy-login-page" src={chappyDragon} alt="" />

@@ -30,8 +30,7 @@ const LoginPage = () => {
     }
 
     const token = await response.json();
-    console.log("Token från servern:", token.jwt); // Logga token för att se om den kommer tillbaka
-    localStorage.setItem(LS_KEY, token.jwt); // Se till att du använder samma nyckel
+    localStorage.setItem(LS_KEY, token.jwt);
     setIsLoggedIn(true);
     setUsername(username);
   }

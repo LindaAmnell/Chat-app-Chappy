@@ -7,6 +7,7 @@ export const DmMessageSchema = Joi.defaults((schema) => {
   textMessage: Joi.string().min(1).required(),
   receiverName: Joi.string().min(1).required(),
   senderName: Joi.string().min(1).required(),
+  date: Joi.date().optional(),
 });
 
 export function isValidDm(Dm: Dm): boolean {

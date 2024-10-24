@@ -16,6 +16,7 @@ async function getUserData(userId: UserId): Promise<User | null> {
   const userList = await getAllUser();
   const objectId = new ObjectId(userId);
   const match = userList.find((u) => u._id.equals(objectId));
+  console.log(match);
   return match || null;
 }
 

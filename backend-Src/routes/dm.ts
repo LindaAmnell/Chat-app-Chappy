@@ -22,7 +22,7 @@ router.get("/protected", async (req: Request, res: Response) => {
     return;
   }
   let token = req.headers.authorization;
-  console.log("Header:", token);
+  //   console.log("Header:", token);
   if (!token) {
     res.sendStatus(401);
     return;
@@ -44,7 +44,7 @@ router.get("/protected", async (req: Request, res: Response) => {
   }
   const userDms = await getDmsForUser(user.name);
 
-  res.send(userDms);
+  res.json({ userDms, user });
 });
 
 router.get("/", async (_, res: Response<WithId<Dm>[]>) => {

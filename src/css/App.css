@@ -19,7 +19,7 @@ body {
 header {
   font-family: var(--header-text);
   font-size: 65px;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.3em;
   place-self: center;
   display: grid;
   place-items: center;

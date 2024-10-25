@@ -5,6 +5,7 @@ import { LoginPage } from "../components/LoginPage.js";
 import { NewUser } from "../components/NewUser.js";
 import { ChatPage } from "../components/ChatPage.js";
 import { Dms } from "../components/Dms.js";
+import { ChatRooms } from "../components/ChatRooms.js";
 
 const router = createHashRouter([
   {
@@ -30,6 +31,10 @@ const router = createHashRouter([
       {
         path: "/dms/:name",
         element: <Dms />,
+      },
+      {
+        path: "/chat-room/:room",
+        element: <ChatRooms />,
       },
     ],
   },

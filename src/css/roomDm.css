@@ -1,0 +1,28 @@
+:root {
+  --text-color: white;
+  --background-color: #a5c0b1;
+  --button-color: #618e75;
+  --header-text: "Londrina Shadow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  --text: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+  --back-color-div: #7da38d;
+  --input-color-dm: #c3d8cc;
+}
+.room-dm {
+}
+.chat-room-name {
+  position: absolute;
+  top: 10%;
+}
+.room-message {
+}
+.room-image-dm {
+  opacity: 0.4;
+  height: 10em;
+}
+.room-div-dm {
+  margin: 1.5em;
+}

@@ -8,10 +8,12 @@ interface ChappyStore {
   username: string;
   dmList: Dm[];
   userList: User[];
+  roomImage: string;
   setRoomList: (roomList: Room[]) => void;
   setUsername: (username: string) => void;
   setDmList: (dmListList: Dm[]) => void;
   setUserList: (userList: User[]) => void;
+  setRoomImage: (roomImage: string) => void;
 }
 
 const useChappystore = create<ChappyStore>((set) => ({
@@ -19,11 +21,13 @@ const useChappystore = create<ChappyStore>((set) => ({
   username: "",
   dmList: [],
   userList: [],
+  roomImage: "",
 
   setRoomList: (roomList: Room[]) => set({ roomList }),
   setUsername: (username: string) => set({ username }),
   setDmList: (dmList: Dm[]) => set({ dmList }),
   setUserList: (userList: User[]) => set({ userList }),
+  setRoomImage: (roomImage: string) => set({ roomImage }),
 }));
 
 export { useChappystore };

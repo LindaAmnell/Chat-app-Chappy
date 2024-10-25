@@ -23,6 +23,7 @@ const ChatPage = () => {
 
   return (
     <section className="chat-page">
+      <header>Chappy</header>
       <div>
         <img className="chappy-chat-page" src={chappyDragon} alt="" />
       </div>

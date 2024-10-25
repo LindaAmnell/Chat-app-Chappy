@@ -1,6 +1,7 @@
 export interface MessageRoom {
-  // senderId?: ObjectId;
+  _id: string;
+  senderName?: string;
   textMessage: string;
-  // RoomId: ObjectId;
+  roomName: string;
   date: Date;
 }

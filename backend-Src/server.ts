@@ -2,6 +2,7 @@ import express, { Express, NextFunction, Request } from "express";
 import { router as userRouter } from "./routes/user.js";
 import { router as roomRouter } from "./routes/room.js";
 import { router as dmRouter } from "./routes/dm.js";
+import { router as roomMessageRouter } from "./routes/RoomMessage.js";
 
 const port: number = Number(process.env.PORT || 1989);
 const app: Express = express();
@@ -17,6 +18,7 @@ app.use("/", (req: Request, _, next: NextFunction) => {
 app.use("/api/user", userRouter);
 app.use("/api/room", roomRouter);
 app.use("/api/dm", dmRouter);
+app.use("/api/room-message", roomMessageRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}...`);

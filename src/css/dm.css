@@ -20,7 +20,7 @@
 }
 .dm-section {
   background-color: var(--back-color-div);
-  padding: 1em;
+
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,8 +1,6 @@
-import { ObjectId } from "mongodb";
-
 export interface MessageRoom {
-  senderId?: ObjectId;
+  senderName?: string;
   textMessage: string;
-  RoomId: ObjectId;
+  roomName: string;
   date: Date;
 }

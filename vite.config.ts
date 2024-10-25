@@ -10,9 +10,3 @@ export default defineConfig({
     },
   },
 });
-
-// proxy: {
-// 	"/api": {
-// 	  target: "http://localhost:1989/",
-// 	  changeOrigin: true,
-// 	  rewrite: (path) => path.replace(/^\/api/, ""), // Om din backend inte har /api i sin struktur

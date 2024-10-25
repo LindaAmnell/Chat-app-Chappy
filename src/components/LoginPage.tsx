@@ -38,6 +38,7 @@ const LoginPage = () => {
 
   return (
     <section className="login-section">
+      <header>Chappy</header>
       <NavLink to="/">
         <img className="back-arrow" src={backArrow} alt="" />
       </NavLink>

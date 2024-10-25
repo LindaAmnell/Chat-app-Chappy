@@ -1,31 +1,53 @@
 import "../css/dm.css";
-import { useParams, useLocation, NavLink } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { Dm } from "../models/Dm";
 import backArrow from "../images/back.png";
-import { useState, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
+
+import { useFetchDms } from "../data/functions/dataFetching.ts";
+import { useStore } from "../data/storeHooks.ts";
+
 const Dms = () => {
   const { name } = useParams<{ name: string }>();
-  const location = useLocation();
-  const dmList: Dm[] = location.state?.dms || [];
-  const userName = location.state?.userName;
-  const [sortedDms, setSortedDms] = useState<Dm[]>([]);
-  const [messageDm, setMessageDm] = useState<string>("");
+  const fetchDms = useFetchDms();
+  const [messageDm, setMessageDm] = useState("");
+  const [sortedDms, setSortedDms] = useState<Dm[] | null>(null);
+  const messageDivRef = useRef<HTMLDivElement>(null);
+  const { dmList, username } = useStore();
+
+  const scrollToBottom = () => {
+    if (messageDivRef.current) {
+      messageDivRef.current.scrollTop = messageDivRef.current.scrollHeight;
+    }
+  };
+
+  const handleGet = async () => {
+    await fetchDms();
+  };
+  useEffect(() => {
+    handleGet();
+  }, []);
 
   useEffect(() => {
-    const sortMessages = (messages: Dm[]) => {
-      return messages.sort(
-        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-      );
-    };
-    const sorted = sortMessages(dmList);
-    setSortedDms(sorted);
-  }, [dmList]);
+    const filteredDms = dmList.filter(
+      (dm) =>
+        (dm.senderName === username && dm.receiverName === name) ||
+        (dm.senderName === name && dm.receiverName === username)
+    );
+    const sortedDms = filteredDms.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
+    setSortedDms(sortedDms);
+  }, [dmList, username, name]);
+  useEffect(() => {
+    scrollToBottom();
+  }, [sortedDms]);
 
   const postDm = async () => {
     const message = {
       textMessage: messageDm,
       receiverName: name,
-      senderName: userName,
+      senderName: username,
       date: new Date(),
     };
     const data = message;
@@ -37,18 +59,16 @@ const Dms = () => {
       body: JSON.stringify(data),
     });
 
-    console.log(data);
-
     if (response.status !== 201) {
       console.log("try again 3");
       return;
     }
+    setMessageDm("");
   };
 
   const handlePostDm = async () => {
-    if (messageDm.trim()) {
-      await postDm();
-    }
+    await postDm();
+    await handleGet();
   };
 
   return (
@@ -57,10 +77,8 @@ const Dms = () => {
         <img className="back-arrow-dm" src={backArrow} alt="Back" />
       </NavLink>
       <h2>{name}</h2>
-      <div>
-        {sortedDms.length === 0 ? (
-          <p>No messages found.</p>
-        ) : (
+      <div className="messages-container" ref={messageDivRef}>
+        {sortedDms && sortedDms.length > 0 ? (
           sortedDms.map((dm) => (
             <div className="div-dms" key={dm._id}>
               <p className="sender-name">{dm.senderName}</p>
@@ -68,20 +86,22 @@ const Dms = () => {
               <p className="date">{new Date(dm.date).toLocaleString()}</p>
             </div>
           ))
+        ) : (
+          <p>Inga meddelanden</p>
         )}
-        <div className="message-input">
-          <textarea
-            value={messageDm}
-            onChange={(e) => setMessageDm(e.target.value)}
-            className="input-dm"
-          />
-          <button className="send-btn" onClick={handlePostDm}>
-            Send
-          </button>
-        </div>
+      </div>
+      <div className="message-input">
+        <textarea
+          value={messageDm}
+          onChange={(e) => setMessageDm(e.target.value)}
+          className="input-dm"
+          placeholder="Skriv ett meddelande..."
+        />
+        <button className="send-btn" onClick={handlePostDm}>
+          Send
+        </button>
       </div>
     </section>
   );
 };
-
 export { Dms };

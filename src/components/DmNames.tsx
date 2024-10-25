@@ -1,9 +1,8 @@
-import { useChappystore } from "../data/store.ts";
+import { useStore } from "../data/storeHooks.ts";
 import { useNavigate } from "react-router-dom";
 
 const DmNames = () => {
-  const dmList = useChappystore((state) => state.dmList);
-  const username = useChappystore((state) => state.username);
+  const { dmList, username } = useStore();
   const navigate = useNavigate();
 
   const uniqueUsers = Array.from(
@@ -19,14 +18,7 @@ const DmNames = () => {
   );
 
   const handleDm = (name: string) => {
-    const filteredDms = dmList.filter(
-      (dm) =>
-        (dm.senderName === username && dm.receiverName === name) ||
-        (dm.senderName === name && dm.receiverName === username)
-    );
-    navigate(`/dms/${name}`, {
-      state: { dms: filteredDms, userName: username },
-    });
+    navigate(`/dms/${name}`, {});
   };
 
   return (

@@ -3,7 +3,7 @@ import { User } from "../../models/User";
 
 const LS_KEY = "JWT-DEMO--TOKEN";
 
-async function getProtected() {
+export async function getProtected() {
   const token: string = localStorage.getItem(LS_KEY) || "";
   if (!token) {
     throw new Error("No token found");
@@ -21,9 +21,5 @@ async function getProtected() {
   }
 
   const data = (await response.json()) as { userDms: Dm[]; user: User };
-  console.log(data.userDms);
-  console.log(data.user);
   return data;
 }
-
-export { getProtected };

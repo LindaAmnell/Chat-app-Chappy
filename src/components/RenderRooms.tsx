@@ -1,11 +1,9 @@
 import { getRooms } from "../data/functions/getRooms.ts";
 import { useEffect, useCallback } from "react";
-import { useChappystore } from "../data/store.ts";
+import { useStore } from "../data/storeHooks.ts";
 
 const RenderRooms = () => {
-  const roomList = useChappystore((state) => state.roomList);
-  const setRoomList = useChappystore((state) => state.setRoomList);
-
+  const { setRoomList, roomList } = useStore();
   const handelGet = useCallback(async () => {
     const result = await getRooms();
     if (result && result.length > 0) {

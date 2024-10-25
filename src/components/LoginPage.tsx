@@ -3,15 +3,13 @@ import { useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
 import backArrow from "../images/back.png";
-import { useChappystore } from "../data/store.ts";
+import { useStore } from "../data/storeHooks.ts";
 const LS_KEY = "JWT-DEMO--TOKEN";
 
 const LoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-  const setUsername = useChappystore((state) => state.setUsername);
-  const username = useChappystore((state) => state.username);
+  const { setUsername, username } = useStore();
 
   async function handleLogin() {
     const data = { username, password };

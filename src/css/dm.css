@@ -28,6 +28,13 @@
 h2 {
   place-self: center;
 }
+.messages-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
 .div-dms {
   margin: 1.5em;
 }

@@ -11,10 +11,10 @@ const RenderRooms = () => {
     if (result && result.length > 0) {
       setRoomList(result);
     }
-  }, [setRoomList]);
+  }, []);
   useEffect(() => {
     handelGet();
-  }, [handelGet]);
+  }, []);
 
   const handleClickRoom = (room: { name: string; image: string }) => {
     setRoomImage(room.image);

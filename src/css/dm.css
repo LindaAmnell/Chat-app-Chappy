@@ -15,33 +15,40 @@
 .back-arrow-dm {
   height: 3em;
   position: absolute;
-  top: 7%;
-  left: 4%;
+  top: 3%;
+  left: 5%;
 }
 .dm-section {
-  background-color: var(--back-color-div);
-
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+  margin-top: 1em;
+  margin: 0.5em;
 }
-h2 {
+.name-dm {
+  font-family: var(--text);
+  color: var(--text-color);
+  font-weight: 100;
+  font-size: 25px;
+  margin: 0 0 0.5em 0;
   place-self: center;
+  padding: 0.3em;
 }
 .messages-container {
-  max-height: 400px;
+  max-height: 350px;
   overflow-y: auto;
-  padding: 10px;
+  padding: 0.5em;
   border: 1px solid #ddd;
-  margin-bottom: 10px;
+
+  background-color: var(--back-color-div);
 }
 .div-dms {
-  margin: 1.5em;
+  margin: 1em;
 }
 .sender-name {
   color: var(--text-color);
   font-family: var(--text);
-  margin-bottom: 0em;
+  margin: 0em;
 }
 .text-message {
   margin: 0em;
@@ -52,7 +59,7 @@ h2 {
 }
 .date {
   color: var(--text-color);
-  margin-top: 0em;
+  margin: 0em;
   font-size: 12px;
   place-self: end;
 }
@@ -72,4 +79,5 @@ h2 {
   width: 6em;
   padding: 0.2em;
   background-color: var(--back-color-div);
+  margin-bottom: 0.5em;
 }

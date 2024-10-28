@@ -6,7 +6,7 @@ const NewUser = () => {
   return (
     <section className="new-user-section">
       <NavLink to="/">
-        <img className="back-arrow" src={backArrow} alt="" />
+        <img className="back-arrow-new-user" src={backArrow} alt="" />
       </NavLink>
 
       <div className="new-user-div">

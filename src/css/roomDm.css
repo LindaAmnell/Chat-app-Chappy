@@ -11,18 +11,43 @@
   --back-color-div: #7da38d;
   --input-color-dm: #c3d8cc;
 }
+.back-arrow--roomdm {
+  height: 2.4em;
+  position: absolute;
+  top: 1%;
+  left: 3%;
+}
 .room-dm {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0.5em;
+}
+.signd-in-user {
+  color: var(--text-color);
+  font-family: var(--text);
+  place-self: end;
+  padding: 0.5em 1em 0.5em 1em;
+  margin: 0em;
+}
+
+.room-message {
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 0.5em;
+  border: 1px solid #ddd;
+  background-color: var(--back-color-div);
+}
+
+.room-div-dm {
+  margin: 1em;
 }
 .chat-room-name {
-  position: absolute;
-  top: 10%;
-}
-.room-message {
-}
-.room-image-dm {
-  opacity: 0.4;
-  height: 10em;
-}
-.room-div-dm {
-  margin: 1.5em;
+  place-self: center;
+  font-weight: 100;
+  font-family: var(--text);
+  color: var(--text-color);
+  font-size: 25px;
+  padding: 0.4em;
+  margin: 0em;
 }

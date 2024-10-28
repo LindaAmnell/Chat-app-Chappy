@@ -76,7 +76,7 @@ const Dms = () => {
       <NavLink to="/chatPage">
         <img className="back-arrow-dm" src={backArrow} alt="Back" />
       </NavLink>
-      <h2>{name}</h2>
+      <h2 className="name-dm">{name}</h2>
       <div className="messages-container" ref={messageDivRef}>
         {sortedDms && sortedDms.length > 0 ? (
           sortedDms.map((dm) => (

@@ -1,5 +1,5 @@
 export interface MessageRoom {
-  senderName?: string;
+  senderName: string;
   textMessage: string;
   roomName: string;
   date: Date;

@@ -42,8 +42,8 @@ input {
 .back-arrow {
   height: 3em;
   position: absolute;
-  top: 100px;
-  left: 10%;
+  top: 10%;
+  left: 4%;
 }
 .login-btn {
   margin-top: 1em;

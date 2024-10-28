@@ -12,14 +12,14 @@ const ChatPage = () => {
   const fetchDms = useFetchDms();
   const { username } = useStore();
 
+  useEffect(() => {
+    fetchDms();
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem(LS_KEY);
     navigate("/");
   };
-
-  useEffect(() => {
-    fetchDms();
-  }, []);
 
   return (
     <section className="chat-page">
@@ -29,7 +29,7 @@ const ChatPage = () => {
       </div>
       <div className="side-bar">
         <div className="div-room">
-          <h2>Rooms:</h2>
+          <h2 className="chat-page-h2">Rooms:</h2>
           <RenderRooms />
         </div>
         <div className="div-dm">

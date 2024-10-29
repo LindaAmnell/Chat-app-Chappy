@@ -16,7 +16,10 @@ const StartPage = () => {
           New user{" "}
         </NavLink>{" "}
       </button>
-      <button className="sign-guset-btn">Sign in as guest</button>
+      <button className="sign-guset-btn">
+        {" "}
+        <NavLink to="guestchatPage">Sign in as guest</NavLink>{" "}
+      </button>
     </div>
   );
 };

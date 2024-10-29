@@ -25,7 +25,7 @@ const DmNames = () => {
     <section>
       <h2 className="chat-page-h2">DM:</h2>
       {uniqueUsers.map((userName) => (
-        <div key={userName}>
+        <div className="dm-name" key={userName}>
           <p onClick={() => handleDm(userName)} className="user-name">
             {userName}
           </p>

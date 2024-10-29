@@ -1,28 +1,32 @@
 import "../css/roomDm.css";
 import "../css/dm.css";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MessageRoom } from "../models/MessageRom";
 import { useEffect, useRef, useState } from "react";
 import { getMessageRooms } from "../data/functions/getRoomMessage";
 import backArrow from "../images/back.png";
 import { useStore } from "../data/storeHooks.ts";
-import { useFetchDms } from "../data/functions/dataFetching.ts";
+import { getActiveUser } from "../data/functions/getActiveUser.ts";
 const ChatRooms = () => {
+  const navigate = useNavigate();
   const [sortedMessages, setSortedMessages] = useState<MessageRoom[] | null>(
     null
   );
-  const { username } = useStore();
-  const fetchDms = useFetchDms();
+  const { username, setUsername } = useStore();
   const { room } = useParams<{ room: string }>();
   const [messageRoom, setMessageRoom] = useState("");
   const messageDivRef = useRef<HTMLDivElement>(null);
-  const scrollToBottom = () => {
-    if (messageDivRef.current) {
-      messageDivRef.current.scrollTop = messageDivRef.current.scrollHeight;
-    }
-  };
 
   const handleGetMessageRoom = async () => {
+    if (username !== "Guest") {
+      const activeUserName = await getActiveUser();
+      if (activeUserName) {
+        setUsername(activeUserName);
+      }
+    } else {
+      setUsername("Guest");
+    }
+
     const messageRooms = await getMessageRooms();
     if (messageRooms) {
       const matchRoomMessage = messageRooms
@@ -33,9 +37,15 @@ const ChatRooms = () => {
       setSortedMessages(matchRoomMessage);
     }
   };
+
+  const scrollToBottom = () => {
+    if (messageDivRef.current) {
+      messageDivRef.current.scrollTop = messageDivRef.current.scrollHeight;
+    }
+  };
+
   useEffect(() => {
     handleGetMessageRoom();
-    fetchDms();
   }, []);
 
   useEffect(() => {
@@ -67,12 +77,23 @@ const ChatRooms = () => {
     await postRoomDm();
     await handleGetMessageRoom();
   };
+  const handleBack = () => {
+    if (username! === "Guest") {
+      navigate("/guestchatPage");
+    } else {
+      navigate("/chatPage");
+    }
+  };
 
   return (
     <section className="room-dm">
-      <NavLink to="/chatPage">
-        <img className="back-arrow--roomdm" src={backArrow} alt="Back" />
-      </NavLink>
+      <img
+        onClick={handleBack}
+        className="back-arrow--roomdm"
+        src={backArrow}
+        alt="Back"
+      />
+
       {username && <p className="signd-in-user">{username}</p>}
       <h2 className="chat-room-name">{room}</h2>
 

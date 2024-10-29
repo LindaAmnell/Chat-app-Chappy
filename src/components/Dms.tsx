@@ -3,9 +3,9 @@ import { useParams, NavLink } from "react-router-dom";
 import { Dm } from "../models/Dm";
 import backArrow from "../images/back.png";
 import { useEffect, useState, useRef } from "react";
-
 import { useFetchDms } from "../data/functions/dataFetching.ts";
 import { useStore } from "../data/storeHooks.ts";
+import { getActiveUser } from "../data/functions/getActiveUser.ts";
 
 const Dms = () => {
   const { name } = useParams<{ name: string }>();
@@ -39,6 +39,7 @@ const Dms = () => {
     );
     setSortedDms(sortedDms);
   }, [dmList, username, name]);
+
   useEffect(() => {
     scrollToBottom();
   }, [sortedDms]);

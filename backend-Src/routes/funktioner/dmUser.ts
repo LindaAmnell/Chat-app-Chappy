@@ -2,8 +2,6 @@ import { Dm } from "../../interfaces/Dm.js";
 import { User } from "../../interfaces/User.js";
 import { getAllDms } from "../../mongoDb/Dm/getAllDms.js";
 import { getAllUser } from "../../mongoDb/User/getAllUser.js";
-import { ObjectId } from "mongodb";
-type UserId = string;
 
 async function getDmsForUser(username: string): Promise<Dm[]> {
   const dmList = await getAllDms();
@@ -12,10 +10,9 @@ async function getDmsForUser(username: string): Promise<Dm[]> {
   );
 }
 
-async function getUserData(userId: UserId): Promise<User | null> {
+async function getUserData(userId: string): Promise<User | null> {
   const userList = await getAllUser();
-  const objectId = new ObjectId(userId);
-  const match = userList.find((u) => u._id.equals(objectId));
+  const match = userList.find((u) => u.name === userId);
   console.log(match);
   return match || null;
 }

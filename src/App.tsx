@@ -1,11 +1,11 @@
-import { StartPage } from "./components/StartPage.js";
+import { LoginPage } from "./components/LoginPage.js";
 import "./css/App.css";
 import chappyDragon from "./images/little-cute-cartoon-dragon-chappy.png";
 
 function App() {
   return (
     <>
-      <StartPage />
+      <LoginPage />
       <div className="dragon-div">
         <img className="dragon-start-page" src={chappyDragon} />
       </div>

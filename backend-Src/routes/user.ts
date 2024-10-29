@@ -9,10 +9,10 @@ import { isValidUser } from "../data/validation/validationUser.js";
 import { creatUser } from "../mongoDb/User/creatUser.js";
 import { deleteUser } from "../mongoDb/User/deleteUser.js";
 import { validateLogin } from "../data/validation/validateLogin.js";
-
+import { Payload } from "./dm.js";
 export const router: Router = express.Router();
 
-const { sign } = jwt;
+const { sign, verify } = jwt;
 
 router.get("/", async (_, res: Response<WithId<User>[]>) => {
   try {
@@ -32,9 +32,7 @@ router.post("/login", async (req: Request, res: Response) => {
     res.sendStatus(500);
     return;
   }
-  console.log("Body är: ", req.body);
   const userId = await validateLogin(req.body.username, req.body.password);
-  console.log("user id: ", userId);
 
   if (!userId) {
     res.status(401).send({
@@ -68,23 +66,6 @@ router.get("/search", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req: Request, res: Response) => {
-  console.log("hej");
-  try {
-    console.log("hej, då");
-    const id: string = req.params.id;
-    const objectId: ObjectId = new ObjectId(id);
-    const user: WithId<User>[] = await getOneUser(objectId);
-    if (user.length < 1) {
-      res.status(404);
-    }
-    res.status(200).json(user);
-  } catch (error: any) {
-    console.error("Error fetching user:", error);
-    res.status(500);
-  }
-});
-
 router.post("/", async (req: Request, res: Response) => {
   const newUser: User = req.body;
   if (isValidUser(newUser)) {
@@ -100,14 +81,40 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/activeuser", async (req: Request, res: Response) => {
+  if (!process.env.SECRET) {
+    res.sendStatus(500);
+    return;
+  }
+  let token = req.headers.authorization;
+  if (!token) {
+    res.sendStatus(401);
+    return;
+  }
+  let payload: Payload;
+
+  try {
+    payload = verify(token, process.env.SECRET) as Payload;
+  } catch (error) {
+    res.sendStatus(400);
+    return;
+  }
+  let username: string = payload.userId;
+  if (username) {
+    res.send(username);
+  } else {
+    res.sendStatus(400);
+  }
+});
+
 router.delete("/:id", async (req: Request, res: Response) => {
   try {
     const id: string = req.params.id;
     if (!ObjectId.isValid(id)) {
       res.sendStatus(400);
     }
-    const objectId: ObjectId = new ObjectId(id);
-    const result = await deleteUser(objectId);
+    const objectIds: ObjectId = new ObjectId(id);
+    const result = await deleteUser(objectIds);
     if (result?.deletedCount === 0) {
       res.sendStatus(404);
     }
@@ -115,5 +122,20 @@ router.delete("/:id", async (req: Request, res: Response) => {
   } catch (error) {
     console.error("wrong with deleting user", error);
     res.sendStatus(500);
+  }
+});
+
+router.get("/:id", async (req: Request, res: Response) => {
+  try {
+    const id: string = req.params.id;
+    const objectIds: ObjectId = new ObjectId(id);
+    const user: WithId<User>[] = await getOneUser(objectIds);
+    if (user.length < 1) {
+      res.status(404);
+    }
+    res.status(200).json(user);
+  } catch (error: any) {
+    console.error("Error fetching user:", error);
+    res.status(500);
   }
 });

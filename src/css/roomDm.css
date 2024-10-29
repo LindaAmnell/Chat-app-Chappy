@@ -14,7 +14,7 @@
 .back-arrow--roomdm {
   height: 2.4em;
   position: absolute;
-  top: 1%;
+  top: 2%;
   left: 3%;
 }
 .room-dm {
@@ -29,6 +29,7 @@
   place-self: end;
   padding: 0.5em 1em 0.5em 1em;
   margin: 0em;
+  font-size: 20px;
 }
 
 .room-message {

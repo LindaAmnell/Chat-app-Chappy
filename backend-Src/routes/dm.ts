@@ -9,20 +9,19 @@ import { getDmsForUser, getUserData } from "./funktioner/dmUser.js";
 
 export const router: Router = express.Router();
 const { verify } = jwt;
-type UserId = string;
-interface Payload {
+
+export interface Payload {
   userId: string;
   iat: number;
 }
 router.get("/protected", async (req: Request, res: Response) => {
-  console.log("get /protected");
 
   if (!process.env.SECRET) {
     res.sendStatus(500);
     return;
   }
   let token = req.headers.authorization;
-  //   console.log("Header:", token);
+
   if (!token) {
     res.sendStatus(401);
     return;
@@ -30,13 +29,11 @@ router.get("/protected", async (req: Request, res: Response) => {
   let payload: Payload;
   try {
     payload = verify(token, process.env.SECRET) as Payload;
-    console.log("Payload: ", payload);
   } catch (error) {
     res.sendStatus(400);
     return;
   }
-  let userId: UserId = payload.userId;
-  console.log("get /protected userID, ", userId);
+  let userId = payload.userId;
   const user = await getUserData(userId);
   if (!user) {
     res.sendStatus(404);

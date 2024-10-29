@@ -6,11 +6,23 @@ import { RenderRooms } from "./RenderRooms.tsx";
 import { useStore } from "../data/storeHooks.ts";
 import { DmNames } from "./DmNames.tsx";
 import { useFetchDms } from "../data/functions/dataFetching.ts";
+import { getActiveUser } from "../data/functions/getActiveUser.ts";
 const LS_KEY = "JWT-DEMO--TOKEN";
 const ChatPage = () => {
   const navigate = useNavigate();
   const fetchDms = useFetchDms();
-  const { username } = useStore();
+  const { username, setUsername } = useStore();
+
+  useEffect(() => {
+    const fetchAndSetActiveUser = async () => {
+      const activeUser = await getActiveUser();
+
+      if (activeUser) {
+        setUsername(activeUser);
+      }
+    };
+    fetchAndSetActiveUser();
+  }, []);
 
   useEffect(() => {
     fetchDms();
@@ -23,7 +35,10 @@ const ChatPage = () => {
 
   return (
     <section className="chat-page">
-      <header>Chappy</header>
+      <div className="profile">
+        {username && <p className="sign-in-name">{username}</p>}
+        <p className="icon">⚙️</p>
+      </div>
       <div>
         <img className="chappy-chat-page" src={chappyDragon} alt="" />
       </div>
@@ -38,8 +53,6 @@ const ChatPage = () => {
             <button onClick={handleLogout} className="sign-out-btn">
               Sign Out
             </button>
-
-            {username && <p className="sign-in-name">{username}</p>}
           </div>
         </div>
       </div>

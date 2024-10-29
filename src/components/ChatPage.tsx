@@ -7,11 +7,12 @@ import { useStore } from "../data/storeHooks.ts";
 import { DmNames } from "./DmNames.tsx";
 import { useFetchDms } from "../data/functions/dataFetching.ts";
 import { getActiveUser } from "../data/functions/getActiveUser.ts";
+import { Header } from "./Header.tsx";
 const LS_KEY = "JWT-DEMO--TOKEN";
 const ChatPage = () => {
   const navigate = useNavigate();
   const fetchDms = useFetchDms();
-  const { username, setUsername } = useStore();
+  const { setUsername } = useStore();
 
   useEffect(() => {
     const fetchAndSetActiveUser = async () => {
@@ -35,10 +36,7 @@ const ChatPage = () => {
 
   return (
     <section className="chat-page">
-      <div className="profile">
-        {username && <p className="sign-in-name">{username}</p>}
-        <p className="icon">⚙️</p>
-      </div>
+      <Header />
       <div>
         <img className="chappy-chat-page" src={chappyDragon} alt="" />
       </div>

@@ -1,0 +1,14 @@
+.sign-in-name {
+  color: var(--text-color);
+  font-family: var(--text);
+  font-size: 20px;
+  margin: 0em;
+}
+.profile {
+  display: flex;
+  margin: 1em;
+  place-self: end;
+}
+.icon {
+  margin: 0em;
+}

@@ -1,34 +1,22 @@
-:root {
-  --text-color: white;
-  --button-color: #618e75;
-  --div-colour: #7da38d;
-  --text: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
 .start-page-section {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
+/* 
 button {
   background-color: #618e75;
   color: var(--text-color);
   font-family: var(--text);
+  font-size: 16px;
+  font-weight: 100;
   font-size: 18px;
   padding: 0.4em;
   border-radius: 0.6em;
   width: 9em;
-}
-.new-user-btn,
-.sign-btn,
-.sign-guset-btn {
-  margin: 0.4em;
-}
+} */
 
-.nav-link {
+/* .nav-link {
   text-decoration: none;
   color: var(--text-color);
-}
+} */

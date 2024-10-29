@@ -1,31 +1,7 @@
-:root {
-  --text-color: white;
-  --background-color: #a5c0b1;
-  --button-color: #618e75;
-  --header-text: "Londrina Shadow", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  --text: "Love Ya Like A Sister", cursive;
-  font-style: normal;
-  --div-color: #7da38d;
-}
-.sign-in-name {
-  color: var(--text-color);
-  font-family: var(--text);
-  font-size: 20px;
-  margin: 0em;
-}
-.profile {
-  display: flex;
-  margin: 1em;
-  place-self: end;
-}
 .chat-page {
-  display: grid;
-  place-items: center;
-}
-.icon {
-  margin: 0em;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
 }
 
 .chappy-chat-page {
@@ -38,13 +14,14 @@
   font-family: var(--text);
   color: var(--text-color);
   font-weight: 100;
-  font-size: 25px;
+  font-size: 20px;
   margin: 0em;
 }
 .side-bar {
   background-color: var(--div-color);
   border-radius: 0.5em 0.5em 0 0;
   border: solid 1px black;
+  margin: 0 1em 0 1em;
 }
 .div-room {
   border-bottom: solid 1px black;
@@ -89,7 +66,6 @@
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  /* justify-content: flex-end; */
 }
 
 .user-name {
@@ -99,4 +75,13 @@
 }
 .dm-name {
   margin: 0.7em 0.7em 0.7em 0;
+}
+
+.locked {
+  margin: 0 0 0 0.3em;
+}
+.sign-in-btn-guest {
+  padding: 0.5em;
+  border-radius: 0.6em;
+  font-size: 15px;
 }

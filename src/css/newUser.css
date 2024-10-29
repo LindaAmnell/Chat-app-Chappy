@@ -1,14 +1,3 @@
-:root {
-  --text-color: white;
-  --background-color: #a5c0b1;
-  --button-color: #618e75;
-  --header-text: "Londrina Shadow", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  --text: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
 .new-user-section {
   display: grid;
   place-items: center;

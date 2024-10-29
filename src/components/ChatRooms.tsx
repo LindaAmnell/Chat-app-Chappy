@@ -7,6 +7,7 @@ import { getMessageRooms } from "../data/functions/getRoomMessage";
 import backArrow from "../images/back.png";
 import { useStore } from "../data/storeHooks.ts";
 import { getActiveUser } from "../data/functions/getActiveUser.ts";
+import { Header } from "./Header.tsx";
 const ChatRooms = () => {
   const navigate = useNavigate();
   const [sortedMessages, setSortedMessages] = useState<MessageRoom[] | null>(
@@ -26,7 +27,6 @@ const ChatRooms = () => {
     } else {
       setUsername("Guest");
     }
-
     const messageRooms = await getMessageRooms();
     if (messageRooms) {
       const matchRoomMessage = messageRooms
@@ -37,13 +37,11 @@ const ChatRooms = () => {
       setSortedMessages(matchRoomMessage);
     }
   };
-
   const scrollToBottom = () => {
     if (messageDivRef.current) {
       messageDivRef.current.scrollTop = messageDivRef.current.scrollHeight;
     }
   };
-
   useEffect(() => {
     handleGetMessageRoom();
   }, []);
@@ -87,16 +85,14 @@ const ChatRooms = () => {
 
   return (
     <section className="room-dm">
+      <Header />
       <img
         onClick={handleBack}
         className="back-arrow--roomdm"
         src={backArrow}
         alt="Back"
       />
-
-      {username && <p className="signd-in-user">{username}</p>}
       <h2 className="chat-room-name">{room}</h2>
-
       <div className="room-message" ref={messageDivRef}>
         {sortedMessages && sortedMessages.length > 0 ? (
           sortedMessages.map((roomDm) => (

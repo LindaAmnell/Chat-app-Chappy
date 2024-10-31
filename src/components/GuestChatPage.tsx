@@ -32,6 +32,11 @@ const GuestChatPage = () => {
     setRoomImage(room.image);
     navigate(`/chat-room/${room.name}`, {});
   };
+  const handleLogutGuest = () => {
+    setUsername("");
+    navigate("/");
+    localStorage.removeItem("username");
+  };
 
   return (
     <section className="chat-page">
@@ -56,6 +61,7 @@ const GuestChatPage = () => {
         <div className="div-dm">
           <div className="sign-user-div">
             <button className="sign-in-btn-guest">Sign in</button>
+            <button onClick={handleLogutGuest}>Leave</button>
           </div>
         </div>
       </div>

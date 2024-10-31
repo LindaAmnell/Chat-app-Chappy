@@ -11,6 +11,20 @@
   margin-top: 1em;
   margin: 0.5em;
 }
+.div-dm {
+  display: flex;
+  flex-direction: column;
+  padding: 0.8em;
+  max-height: 160px;
+  min-height: 160px;
+  overflow-y: auto;
+}
+.send-dm-div {
+  display: flex;
+  gap: 1em;
+  margin: 0.5em;
+}
+
 .name-dm {
   font-family: var(--text);
   color: var(--text-color);
@@ -65,4 +79,36 @@
   padding: 0.2em;
   background-color: var(--back-color-div);
   margin-bottom: 0.5em;
+}
+.send-dm {
+  color: var(--text-color);
+  height: 2em;
+  width: 1.5em;
+}
+.user-search {
+  position: absolute;
+  top: 2%;
+  left: 3%;
+  border: 2px solid rgb(216, 210, 210);
+  background-color: var(--back-color-div);
+  height: 84vh;
+  min-width: 14em;
+  padding: 2.3em;
+  overflow: scroll;
+}
+.user-div {
+  display: flex;
+}
+
+.name-users {
+  color: var(--text-color);
+  font-family: var(--text);
+  margin-left: 0.3em;
+}
+
+.back-arrow-search-user {
+  height: 2em;
+  position: absolute;
+  top: 1%;
+  left: 2%;
 }

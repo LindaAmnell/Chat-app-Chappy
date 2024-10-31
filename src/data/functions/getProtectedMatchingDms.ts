@@ -1,9 +1,8 @@
 import { Dm } from "../../models/Dm";
-import { User } from "../../models/User";
 
 const LS_KEY = "JWT-DEMO--TOKEN";
 
-export async function getProtected() {
+export async function getProtectedMatchingDms(): Promise<Dm[] | undefined> {
   const token: string = localStorage.getItem(LS_KEY) || "";
   if (!token) {
     throw new Error("No token found");
@@ -12,7 +11,8 @@ export async function getProtected() {
   const response: Response = await fetch("/api/dm/protected", {
     method: "GET",
     headers: {
-      Authorization: token,
+      "Content-Type": "application/json",
+      Authorization: token ? token : "",
     },
   });
 
@@ -20,6 +20,6 @@ export async function getProtected() {
     throw new Error("Failed to fetch DMs");
   }
 
-  const data = (await response.json()) as { userDms: Dm[]; user: User };
-  return data;
+  const dms: Dm[] = await response.json();
+  return dms;
 }

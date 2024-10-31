@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { isValidDm } from "../data/validation/validationDmMessage.js";
 import { getAllDms } from "../mongoDb/Dm/getAllDms.js";
 import { WithId } from "mongodb";
-import { getDmsForUser, getUserData } from "./funktioner/dmUser.js";
+import { getMatchingDms } from "../mongoDb/Dm/getMatchingDms.js";
 
 export const router: Router = express.Router();
 const { verify } = jwt;
@@ -15,7 +15,6 @@ export interface Payload {
   iat: number;
 }
 router.get("/protected", async (req: Request, res: Response) => {
-
   if (!process.env.SECRET) {
     res.sendStatus(500);
     return;
@@ -34,14 +33,12 @@ router.get("/protected", async (req: Request, res: Response) => {
     return;
   }
   let userId = payload.userId;
-  const user = await getUserData(userId);
-  if (!user) {
-    res.sendStatus(404);
-    return;
+  const user = await getMatchingDms(userId);
+  if (user) {
+    res.send(user);
+  } else {
+    res.sendStatus(400);
   }
-  const userDms = await getDmsForUser(user.name);
-
-  res.json({ userDms, user });
 });
 
 router.get("/", async (_, res: Response<WithId<Dm>[]>) => {

@@ -22,7 +22,7 @@ const RenderRooms = () => {
   };
 
   return (
-    <div>
+    <div className="div-room">
       {roomList.map((room) => (
         <div className="rooms" key={room._id}>
           {" "}

@@ -58,6 +58,7 @@ router.get("/search", async (req, res) => {
     if (searchResult.length === 0) {
       res.status(404).send("No user found");
     } else {
+      console.log("hejhej");
       res.json(searchResult);
     }
   } catch (error) {

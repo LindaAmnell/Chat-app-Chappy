@@ -1,7 +1,6 @@
 .chat-page {
   display: flex;
   flex-direction: column;
-  margin: 0.5em;
 }
 
 .chappy-chat-page {
@@ -16,6 +15,7 @@
   font-weight: 100;
   font-size: 20px;
   margin: 0em;
+  align-self: center;
 }
 .side-bar {
   background-color: var(--div-color);
@@ -23,15 +23,48 @@
   border: solid 1px black;
   margin: 0 1em 0 1em;
 }
+.room-div {
+  display: flex;
+  gap: 0.4em;
+  margin: 0.5em;
+}
 .div-room {
   border-bottom: solid 1px black;
-  padding: 1em;
-  max-height: 300px;
+  margin-left: 0.5em;
+  max-height: 240px;
   overflow-y: auto;
+}
+.add-button-container {
+  position: relative;
+  display: inline-block;
+}
+.add-button {
+  border-radius: 50%;
+  height: 1.5em;
+  width: 1.5em;
+  color: var(--text-color);
+  border: solid 1px var(--button-color);
+  /* margin-top: 0.7em; */
+  cursor: pointer;
+}
+.add-button-container:hover::after {
+  content: "Add Room";
+  position: absolute;
+  top: 60%;
+  left: 2.5em;
+  transform: translateY(-50%);
+  background-color: var(--button-color);
+  color: var(--tooltip-text-color, white);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
 }
 .rooms {
   display: flex;
-  margin: 0.7em 0.7em 0.7em 0;
+  margin: 0.5em 0.7em 0.7em 0;
   padding-right: 1em;
 }
 .room-image {
@@ -39,7 +72,7 @@
   border-radius: 10em;
   width: 2em;
   margin-right: 0.5em;
-  opacity: 0.7;
+  /* opacity: 0.7; */
 }
 .room-name {
   margin: 0em;
@@ -47,14 +80,6 @@
   font-family: var(--text);
   color: var(--text-color);
   font-size: 18px;
-}
-.div-dm {
-  display: flex;
-  flex-direction: column;
-  padding: 1em;
-  max-height: 220px;
-  min-height: 220px;
-  overflow-y: auto;
 }
 
 .sign-out-btn {
@@ -74,7 +99,7 @@
   margin: 0em;
 }
 .dm-name {
-  margin: 0.7em 0.7em 0.7em 0;
+  margin: 0.5em 0.5em 0.5em 0;
 }
 
 .locked {

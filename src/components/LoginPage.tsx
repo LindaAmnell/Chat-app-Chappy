@@ -1,7 +1,7 @@
 import "../css/login.css";
 import "../css/startPage.css";
 import { useState } from "react";
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
 import { useStore } from "../data/storeHooks.ts";
 const LS_KEY = "JWT-DEMO--TOKEN";
@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const { setUsername, username } = useStore();
+  const navigate = useNavigate();
   async function handleLogin() {
     const data = { username, password };
     console.log("Skickar inloggningsuppgifter till servern: ", data);
@@ -34,6 +35,11 @@ const LoginPage = () => {
   if (isLoggedIn) {
     return <Navigate to="/chatPage" replace />;
   }
+  const handleGuesLogin = () => {
+    setUsername("Guest");
+    localStorage.setItem("username", "Guest");
+    navigate("/guestchatPage");
+  };
 
   return (
     <section className="login-section">
@@ -46,9 +52,9 @@ const LoginPage = () => {
         <button className="login-btn" onClick={handleLogin}>
           Sign in
         </button>{" "}
-        <NavLink className="sign-guset-btn" to="/guestchatPage">
+        <button onClick={handleGuesLogin} className="sign-guset-btn">
           Sign in as guest
-        </NavLink>{" "}
+        </button>{" "}
         <button className="new-user-btn">
           <NavLink to="/newUser" className="nav-link">
             New user{" "}

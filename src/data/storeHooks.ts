@@ -9,6 +9,8 @@ export const useStore = () => {
   const setRoomList = useChappystore((state) => state.setRoomList);
   const setRoomImage = useChappystore((state) => state.setRoomImage);
   const roomImage = useChappystore((state) => state.roomImage);
+  const setUserImage = useChappystore((state) => state.setUserImage);
+  const userImage = useChappystore((state) => state.userImage);
 
   return {
     setUsername,
@@ -19,5 +21,7 @@ export const useStore = () => {
     setRoomList,
     setRoomImage,
     roomImage,
+    userImage,
+    setUserImage,
   };
 };

@@ -3,17 +3,16 @@ import { useParams, NavLink } from "react-router-dom";
 import { Dm } from "../models/Dm";
 import backArrow from "../images/back.png";
 import { useEffect, useState, useRef } from "react";
-import { useFetchDms } from "../data/functions/dataFetching.ts";
 import { useStore } from "../data/storeHooks.ts";
+import { getProtectedMatchingDms } from "../data/functions/getProtectedMatchingDms.ts";
 import { getActiveUser } from "../data/functions/getActiveUser.ts";
 
 const Dms = () => {
   const { name } = useParams<{ name: string }>();
-  const fetchDms = useFetchDms();
   const [messageDm, setMessageDm] = useState("");
   const [sortedDms, setSortedDms] = useState<Dm[] | null>(null);
   const messageDivRef = useRef<HTMLDivElement>(null);
-  const { dmList, username } = useStore();
+  const { username, setUsername } = useStore();
 
   const scrollToBottom = () => {
     if (messageDivRef.current) {
@@ -22,23 +21,30 @@ const Dms = () => {
   };
 
   const handleGet = async () => {
-    await fetchDms();
+    const activeusername = await getActiveUser();
+    if (activeusername) {
+      setUsername(activeusername);
+    }
+
+    const matchingDms = await getProtectedMatchingDms();
+    if (username && matchingDms) {
+      const filteredDms = matchingDms.filter(
+        (dm) =>
+          (dm.senderName === username && dm.receiverName === name) ||
+          (dm.senderName === name && dm.receiverName === username)
+      );
+      const sortedDms = filteredDms.sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+
+      setSortedDms(sortedDms);
+      scrollToBottom();
+    }
+    console.log("dms", sortedDms);
   };
   useEffect(() => {
     handleGet();
-  }, []);
-
-  useEffect(() => {
-    const filteredDms = dmList.filter(
-      (dm) =>
-        (dm.senderName === username && dm.receiverName === name) ||
-        (dm.senderName === name && dm.receiverName === username)
-    );
-    const sortedDms = filteredDms.sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
-    setSortedDms(sortedDms);
-  }, [dmList, username, name]);
+  }, [username, name]);
 
   useEffect(() => {
     scrollToBottom();

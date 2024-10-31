@@ -18,7 +18,6 @@ async function searchUser(query: string): Promise<User[] | undefined> {
       console.log("Error: ", users.message);
       return undefined;
     }
-
     return users;
   } catch (error) {
     console.error("Nätverksfel: ", error);

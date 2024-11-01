@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useStore } from "../data/storeHooks.ts";
 import { getRooms } from "../data/APIFunctions/getRooms.ts";
 import { Header } from "./Header.tsx";
+import { FaLock } from "react-icons/fa";
 
 const GuestChatPage = () => {
   const { setRoomList, roomList, setRoomImage, setUsername } = useStore();
@@ -45,24 +46,31 @@ const GuestChatPage = () => {
         <img className="chappy-chat-page" src={chappyDragon} alt="" />
       </div>
       <div className="side-bar">
-        <div className="div-room">
+        <div className="div-room-guest">
           <h2 className="chat-page-h2">Rooms:</h2>
           {roomList &&
             roomList.map((room) => (
               <div className="rooms" key={room._id}>
                 <img className="room-image" src={room.image} alt="" />
-                <p onClick={() => handleClickRoom(room)} className="room-name">
+                <p
+                  onClick={() => handleClickRoom(room)}
+                  className={`room-name ${room.status ? "locked-room" : ""}`}>
                   {room.name}
                 </p>
-                {room.status === true && <p className="locked">🔒</p>}
+                {room.status === true && (
+                  <p className="locked">
+                    <FaLock />
+                  </p>
+                )}
               </div>
             ))}
         </div>
-        <div className="div-dm">
-          <div className="sign-user-div">
-            <button className="sign-in-btn-guest">Sign in</button>
-            <button onClick={handleLogutGuest}>Leave</button>
-          </div>
+
+        <div className="sign-guest-div">
+          <button className="sign-in-btn-guest">Sign in</button>
+          <button className="leav-guest" onClick={handleLogutGuest}>
+            Leave
+          </button>
         </div>
       </div>
     </section>

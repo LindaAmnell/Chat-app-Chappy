@@ -12,10 +12,21 @@
   align-self: center;
 }
 .side-bar {
-  background-color: var(--div-color);
+  background-color: hsla(158, 54%, 32%, 1);
+  background-image: radial-gradient(
+      at 20% 39%,
+      hsla(155, 50%, 38%, 0.57) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 63% 14%, hsla(155, 40%, 41%, 1) 0px, transparent 50%),
+    radial-gradient(at 40% 39%, hsla(155, 74%, 38%, 1) 0px, transparent 50%),
+    radial-gradient(at 43% 90%, hsla(155, 72%, 27%, 1) 0px, transparent 50%),
+    radial-gradient(at 54% 25%, rgb(41, 103, 77) 0px, transparent 50%),
+    radial-gradient(at 57% 56%, rgb(51, 167, 118) 0px, transparent 50%);
   border-radius: 0.5em 0.5em 0 0;
   border: solid 1px black;
   margin: 0 1em 0 1em;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 .room-div {
   display: flex;
@@ -80,11 +91,11 @@
   width: 8em;
 }
 .sign-user-div {
-  margin-top: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
+  margin: 0.5em 0 0.8em 0;
 }
 
 .user-name {
@@ -98,9 +109,33 @@
 
 .locked {
   margin: 0 0 0 0.3em;
+  align-self: center;
+  opacity: 0.4;
+  color: white;
 }
-.sign-in-btn-guest {
+.locked-room {
+  opacity: 0.4;
+}
+.div-room-guest {
+  margin-left: 0.5em;
+  max-height: 600px;
+  overflow-y: auto;
   padding: 0.5em;
+}
+.sign-guest-div {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 1em;
+}
+
+.sign-in-btn-guest {
+  padding: 0.4em;
   border-radius: 0.6em;
   font-size: 15px;
+  margin: 0.5em;
+}
+.leav-guest {
 }

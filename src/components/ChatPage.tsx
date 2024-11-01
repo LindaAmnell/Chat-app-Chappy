@@ -12,9 +12,10 @@ import { Header } from "./Header.tsx";
 import { addRoom } from "../data/APIFunctions/addRoom.ts";
 import { getRooms } from "../data/APIFunctions/getRooms.ts";
 const LS_KEY = "JWT-DEMO--TOKEN";
+
 const ChatPage = () => {
   const navigate = useNavigate();
-  const { setUsername, setUserImage, setRoomList, roomList } = useStore();
+  const { setUsername, setUserImage, setRoomList } = useStore();
   const [roomNameValue, setRoomNameValue] = useState("");
   const [roomImageValue, setRoomImageValue] = useState("");
   const [isLocked, setIsLocked] = useState<boolean>(false);

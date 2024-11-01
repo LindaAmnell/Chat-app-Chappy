@@ -1,7 +1,7 @@
 import "../css/dm.css";
 import { useParams, NavLink } from "react-router-dom";
 import { Dm } from "../models/Dm";
-import backArrow from "../images/back.png";
+import { FiArrowLeftCircle } from "react-icons/fi";
 import { useEffect, useState, useRef } from "react";
 import { useStore } from "../data/storeHooks.ts";
 import { getProtectedMatchingDms } from "../data/APIFunctions/getProtectedMatchingDms.ts";
@@ -81,15 +81,24 @@ const Dms = () => {
   return (
     <section className="dm-section">
       <NavLink to="/chatPage">
-        <img className="back-arrow-dm" src={backArrow} alt="Back" />
+        <FiArrowLeftCircle className="back-arrow-dm" />
       </NavLink>
       <h2 className="name-dm">{name}</h2>
       <div className="messages-container" ref={messageDivRef}>
         {sortedDms && sortedDms.length > 0 ? (
           sortedDms.map((dm) => (
-            <div className="div-dms" key={dm._id}>
+            <div
+              className={`div-dms ${
+                dm.senderName === username ? "active-user" : "other-user"
+              }`}
+              key={dm._id}>
               <p className="sender-name">{dm.senderName}</p>
-              <p className="text-message">{dm.textMessage}</p>
+              <p
+                className={`text-message ${
+                  dm.senderName === username ? "active-user-message" : ""
+                }`}>
+                {dm.textMessage}
+              </p>
               <p className="date">{new Date(dm.date).toLocaleString()}</p>
             </div>
           ))

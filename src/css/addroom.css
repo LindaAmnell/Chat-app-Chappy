@@ -1,15 +1,17 @@
 .add-room-div {
-  position: absolute;
+  position: fixed;
   display: flex;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   flex-direction: column;
-  top: 2%;
-  left: 8%;
   border: 2px solid rgb(216, 210, 210);
-  background-color: var(--back-color-div);
+  background-color: var(--box-color);
   height: 70vh;
   min-width: 14em;
   padding: 1em;
-  overflow: scroll;
+  z-index: 1;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
 
   p {
     align-self: center;
@@ -22,13 +24,9 @@
   height: 1.5em;
   width: 1.5em;
   position: absolute;
-
   color: var(--text-color);
 }
 .add-input-div {
   display: flex;
   flex-direction: column;
-}
-
-.checkbox {
 }

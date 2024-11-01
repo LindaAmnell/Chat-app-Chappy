@@ -1,6 +1,6 @@
 import { useStore } from "../data/storeHooks.ts";
 import { useNavigate } from "react-router-dom";
-import backArrow from "../images/back.png";
+import { FiArrowLeftCircle } from "react-icons/fi";
 import { BsEnvelopePlus } from "react-icons/bs";
 import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 import { getAllUser } from "../data/APIFunctions/getAllUsers.ts";
@@ -51,6 +51,7 @@ const DmNames = () => {
     const value = e.target.value.trim().toLowerCase();
     if (value === "") {
       setMatchingUsers(allUsers);
+      handleGet();
       return;
     } else {
       const response = await searchUser(value);
@@ -84,11 +85,9 @@ const DmNames = () => {
       <div className="div-dm">
         {searching && (
           <div className="user-search">
-            <img
+            <FiArrowLeftCircle
               onClick={() => setSearching(false)}
               className="back-arrow-search-user"
-              src={backArrow}
-              alt="Back"
             />
 
             <input

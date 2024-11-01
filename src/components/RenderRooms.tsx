@@ -1,4 +1,5 @@
 import { getRooms } from "../data/APIFunctions/getRooms.ts";
+import { FaUnlock } from "react-icons/fa";
 import { useEffect, useCallback } from "react";
 import { useStore } from "../data/storeHooks.ts";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,11 @@ const RenderRooms = () => {
           <p onClick={() => handleClickRoom(room)} className="room-name">
             {room.name}
           </p>
+          {room.status === true && (
+            <p className="locked">
+              <FaUnlock />
+            </p>
+          )}
         </div>
       ))}
     </div>

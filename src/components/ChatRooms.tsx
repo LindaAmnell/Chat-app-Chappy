@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { MessageRoom } from "../models/MessageRom";
 import { useEffect, useRef, useState } from "react";
 import { getMessageRooms } from "../data/APIFunctions/getRoomMessage.ts";
-import backArrow from "../images/back.png";
+import { FiArrowLeftCircle } from "react-icons/fi";
 import { useStore } from "../data/storeHooks.ts";
 import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 import { Header } from "./Header.tsx";
@@ -86,19 +86,23 @@ const ChatRooms = () => {
   return (
     <section className="room-dm">
       <Header />
-      <img
-        onClick={handleBack}
-        className="back-arrow--roomdm"
-        src={backArrow}
-        alt="Back"
-      />
+      <FiArrowLeftCircle onClick={handleBack} className="get-back-arow" />
       <h2 className="chat-room-name">{room}</h2>
       <div className="room-message" ref={messageDivRef}>
         {sortedMessages && sortedMessages.length > 0 ? (
           sortedMessages.map((roomDm) => (
-            <div className="room-div-dm" key={roomDm._id}>
+            <div
+              className={`room-div-dm ${
+                roomDm.senderName === username ? "active-user" : "other-user"
+              }`}
+              key={roomDm._id}>
               <p className="sender-name">{roomDm.senderName}</p>
-              <p className="text-message">{roomDm.textMessage}</p>
+              <p
+                className={`text-message ${
+                  roomDm.senderName === username ? "active-user-message" : ""
+                }`}>
+                {roomDm.textMessage}
+              </p>
               <p className="date">{new Date(roomDm.date).toLocaleString()}</p>
             </div>
           ))

@@ -1,8 +1,9 @@
 import "../css/header.css";
 import { useStore } from "../data/storeHooks.ts";
-import { getActiveUser } from "../data/functions/getActiveUser";
+import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 import { useEffect } from "react";
-import { searchUser } from "../data/functions/searchUser.ts";
+import { searchUser } from "../data/APIFunctions/searchUser.ts";
+import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
 import { CgProfile } from "react-icons/cg";
 
 const Header = () => {
@@ -39,6 +40,7 @@ const Header = () => {
 
   return (
     <header>
+      <img className="chappy-chat-page" src={chappyDragon} alt="" />
       <div className="profile">
         {userImage ? (
           <img src={userImage} alt="Profile" className="profile-image" />

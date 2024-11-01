@@ -2,12 +2,12 @@ import { useStore } from "../data/storeHooks.ts";
 import { useNavigate } from "react-router-dom";
 import backArrow from "../images/back.png";
 import { BsEnvelopePlus } from "react-icons/bs";
-import { getActiveUser } from "../data/functions/getActiveUser.ts";
-import { getAllUser } from "../data/functions/getAllUsers.ts";
+import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
+import { getAllUser } from "../data/APIFunctions/getAllUsers.ts";
 import { useEffect, useState } from "react";
 import { User } from "../models/User.ts";
-import { getProtectedMatchingDms } from "../data/functions/getProtectedMatchingDms.ts";
-import { searchUser } from "../data/functions/searchUser.ts";
+import { getProtectedMatchingDms } from "../data/APIFunctions/getProtectedMatchingDms.ts";
+import { searchUser } from "../data/APIFunctions/searchUser.ts";
 
 const DmNames = () => {
   const { username, setUsername } = useStore();

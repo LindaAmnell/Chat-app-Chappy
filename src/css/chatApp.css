@@ -3,12 +3,6 @@
   flex-direction: column;
 }
 
-.chappy-chat-page {
-  height: 3em;
-  position: absolute;
-  top: 1%;
-  left: 1%;
-}
 .chat-page-h2 {
   font-family: var(--text);
   color: var(--text-color);

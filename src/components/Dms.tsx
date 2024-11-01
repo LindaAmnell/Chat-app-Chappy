@@ -4,8 +4,8 @@ import { Dm } from "../models/Dm";
 import backArrow from "../images/back.png";
 import { useEffect, useState, useRef } from "react";
 import { useStore } from "../data/storeHooks.ts";
-import { getProtectedMatchingDms } from "../data/functions/getProtectedMatchingDms.ts";
-import { getActiveUser } from "../data/functions/getActiveUser.ts";
+import { getProtectedMatchingDms } from "../data/APIFunctions/getProtectedMatchingDms.ts";
+import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 
 const Dms = () => {
   const { name } = useParams<{ name: string }>();

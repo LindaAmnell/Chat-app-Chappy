@@ -1,19 +1,23 @@
 import "../css/chatApp.css";
 import "../css/addroom.css";
 import { useEffect, useState } from "react";
-import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
 import { FiArrowLeftCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import { RenderRooms } from "./RenderRooms.tsx";
 import { useStore } from "../data/storeHooks.ts";
 import { DmNames } from "./DmNames.tsx";
-import { getActiveUser } from "../data/functions/getActiveUser.ts";
+import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 import { Header } from "./Header.tsx";
+import { addRoom } from "../data/APIFunctions/addRoom.ts";
+import { getRooms } from "../data/APIFunctions/getRooms.ts";
 const LS_KEY = "JWT-DEMO--TOKEN";
 const ChatPage = () => {
   const navigate = useNavigate();
-  const { setUsername, setUserImage } = useStore();
+  const { setUsername, setUserImage, setRoomList, roomList } = useStore();
+  const [roomNameValue, setRoomNameValue] = useState("");
+  const [roomImageValue, setRoomImageValue] = useState("");
+  const [isLocked, setIsLocked] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,14 +37,32 @@ const ChatPage = () => {
     setUsername("");
     navigate("/");
   };
-  const handleAddRoom = () => {};
+  const handleAddRoom = async () => {
+    const newRoom = {
+      name: roomNameValue,
+      status: isLocked,
+      image: roomImageValue,
+    };
+    const roomData = await addRoom(newRoom);
+    if (roomData) {
+      await fetchUpdatedRooms();
+    }
+    setRoomNameValue("");
+    setRoomImageValue("");
+    setIsLocked(false);
+    setIsVisible(false);
+  };
+  const fetchUpdatedRooms = async () => {
+    const updatedRooms = await getRooms();
+    if (updatedRooms && updatedRooms.length > 0) {
+      setRoomList(updatedRooms);
+    }
+  };
 
   return (
     <section className="chat-page">
       <Header />
-      <div>
-        <img className="chappy-chat-page" src={chappyDragon} alt="" />
-      </div>
+      <div></div>
       <div className="side-bar">
         <div className="room-div">
           <h2 className="chat-page-h2">Rooms:</h2>
@@ -60,13 +82,28 @@ const ChatPage = () => {
             <p>Add new room</p>
             <div className="add-input-div">
               <label>Name</label>
-              <input type="text" />
+              <input
+                value={roomNameValue}
+                type="text"
+                onChange={(e) => setRoomNameValue(e.target.value)}
+              />
               <label>Image</label>
-              <input type="text" />
+              <input
+                value={roomImageValue}
+                type="text"
+                onChange={(e) => setRoomImageValue(e.target.value)}
+              />
               <div>
                 <label>Locked Room</label>
-                <input className="checkbox" type="checkbox" />
+
+                <input
+                  checked={isLocked}
+                  onChange={() => setIsLocked(!isLocked)}
+                  className="checkbox"
+                  type="checkbox"
+                />
               </div>
+              <button onClick={handleAddRoom}>Add Room</button>
             </div>
           </div>
         )}

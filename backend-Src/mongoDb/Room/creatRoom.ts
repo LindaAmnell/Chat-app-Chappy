@@ -9,7 +9,7 @@ async function creatRoom(room: Room): Promise<ObjectId | null> {
     const result: InsertOneResult<Room> = await col.insertOne(room);
     return result.insertedId;
   } catch (error) {
-    console.error("Error, insert Dm", error);
+    console.error("Error, insert Room", error);
     throw error;
   } finally {
     await client.close();

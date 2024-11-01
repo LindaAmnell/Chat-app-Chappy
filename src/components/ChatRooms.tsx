@@ -3,10 +3,10 @@ import "../css/dm.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { MessageRoom } from "../models/MessageRom";
 import { useEffect, useRef, useState } from "react";
-import { getMessageRooms } from "../data/functions/getRoomMessage";
+import { getMessageRooms } from "../data/APIFunctions/getRoomMessage.ts";
 import backArrow from "../images/back.png";
 import { useStore } from "../data/storeHooks.ts";
-import { getActiveUser } from "../data/functions/getActiveUser.ts";
+import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 import { Header } from "./Header.tsx";
 const ChatRooms = () => {
   const navigate = useNavigate();

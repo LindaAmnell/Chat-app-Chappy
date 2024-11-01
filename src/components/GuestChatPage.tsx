@@ -3,7 +3,7 @@ import { useEffect, useCallback } from "react";
 import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../data/storeHooks.ts";
-import { getRooms } from "../data/functions/getRooms.ts";
+import { getRooms } from "../data/APIFunctions/getRooms.ts";
 import { Header } from "./Header.tsx";
 
 const GuestChatPage = () => {
@@ -26,7 +26,7 @@ const GuestChatPage = () => {
     image: string;
     status: boolean;
   }) => {
-    if (!room.status) {
+    if (room.status) {
       return;
     }
     setRoomImage(room.image);
@@ -54,7 +54,7 @@ const GuestChatPage = () => {
                 <p onClick={() => handleClickRoom(room)} className="room-name">
                   {room.name}
                 </p>
-                {room.status === false && <p className="locked">🔒</p>}
+                {room.status === true && <p className="locked">🔒</p>}
               </div>
             ))}
         </div>

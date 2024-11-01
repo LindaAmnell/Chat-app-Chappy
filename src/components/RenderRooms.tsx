@@ -1,4 +1,4 @@
-import { getRooms } from "../data/functions/getRooms.ts";
+import { getRooms } from "../data/APIFunctions/getRooms.ts";
 import { useEffect, useCallback } from "react";
 import { useStore } from "../data/storeHooks.ts";
 import { useNavigate } from "react-router-dom";

@@ -9,7 +9,7 @@ async function creatUser(user: User): Promise<ObjectId | null> {
     const result: InsertOneResult<User> = await col.insertOne(user);
     return result.insertedId;
   } catch (error) {
-    console.error("Error, insert Dm", error);
+    console.error("Error, insert User", error);
     throw error;
   } finally {
     await client.close();

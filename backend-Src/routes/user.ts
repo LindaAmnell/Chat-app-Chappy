@@ -74,7 +74,7 @@ router.post("/", async (req: Request, res: Response) => {
       await creatUser(newUser);
       res.sendStatus(201);
     } catch (error) {
-      console.error("Error inserting DM:", error);
+      console.error("Error inserting user:", error);
       res.sendStatus(500);
     }
   } else {

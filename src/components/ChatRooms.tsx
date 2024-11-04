@@ -8,6 +8,7 @@ import { FiArrowLeftCircle } from "react-icons/fi";
 import { useStore } from "../data/storeHooks.ts";
 import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 import { Header } from "./Header.tsx";
+
 const ChatRooms = () => {
   const navigate = useNavigate();
   const [sortedMessages, setSortedMessages] = useState<MessageRoom[] | null>(

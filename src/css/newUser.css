@@ -29,11 +29,35 @@ input {
 }
 
 .back-arrow-new-user {
-  height: 3em;
+  height: 2em;
+  width: 2em;
+  color: white;
   position: absolute;
-  top: 10%;
+  top: 6%;
   left: 7%;
 }
 .creat-btn {
   margin-top: 1em;
+}
+.confirmation-message {
+  text-align: center;
+  padding: 3em;
+  color: var(--text-color);
+  font-family: var(--text);
+  border-radius: 1em;
+  border: 1px black solid;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  margin-top: 2em;
+}
+
+.new-user-login-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-user-login-btn:hover {
+  background-color: rgb(42, 148, 99);
 }

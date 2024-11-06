@@ -11,11 +11,22 @@ export const useStore = () => {
   const roomImage = useChappystore((state) => state.roomImage);
   const setUserImage = useChappystore((state) => state.setUserImage);
   const userImage = useChappystore((state) => state.userImage);
+  const setUser = useChappystore((state) => state.setUser); // Lägg till setUser
+  const user = useChappystore((state) => state.user); // Lägg till user
+
+  const isProfileSettingsVisible = useChappystore(
+    (state) => state.isProfileSettingsVisible
+  );
+  const toggleProfileSettings = useChappystore(
+    (state) => state.toggleProfileSettings
+  );
 
   return {
     setUsername,
     setDmList,
+    setUser,
     username,
+    user,
     dmList,
     roomList,
     setRoomList,
@@ -23,5 +34,7 @@ export const useStore = () => {
     roomImage,
     userImage,
     setUserImage,
+    isProfileSettingsVisible,
+    toggleProfileSettings,
   };
 };

@@ -11,6 +11,9 @@ interface ChappyStore {
   roomImage: string;
   username: string;
   userImage: string;
+  isProfileSettingsVisible: boolean;
+  user: User | null;
+  toggleProfileSettings: (isVisible: boolean) => void;
   setIsLoggedIn: (value: boolean) => void;
   setUsername: (username: string) => void;
   setRoomList: (roomList: Room[]) => void;
@@ -18,6 +21,7 @@ interface ChappyStore {
   setUserList: (userList: User[]) => void;
   setRoomImage: (roomImage: string) => void;
   setUserImage: (UserImage: string) => void;
+  setUser: (user: User | null) => void;
 }
 
 const useChappystore = create<ChappyStore>((set) => ({
@@ -28,6 +32,10 @@ const useChappystore = create<ChappyStore>((set) => ({
   userList: [],
   roomImage: "",
   userImage: "",
+  user: null,
+  isProfileSettingsVisible: false,
+  toggleProfileSettings: (isVisible: boolean) =>
+    set({ isProfileSettingsVisible: isVisible }),
 
   setIsLoggedIn: (value: boolean) => set({ isLoggedIn: value }),
   setRoomList: (roomList: Room[]) => set({ roomList }),
@@ -36,6 +44,7 @@ const useChappystore = create<ChappyStore>((set) => ({
   setUserList: (userList: User[]) => set({ userList }),
   setRoomImage: (roomImage: string) => set({ roomImage }),
   setUserImage: (userImage: string) => set({ userImage }),
+  setUser: (user: User | null) => set({ user }),
 }));
 
 export { useChappystore };

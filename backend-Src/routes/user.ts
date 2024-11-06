@@ -58,7 +58,6 @@ router.get("/search", async (req, res) => {
     if (searchResult.length === 0) {
       res.status(404).send("No user found");
     } else {
-      console.log("hejhej");
       res.json(searchResult);
     }
   } catch (error) {
@@ -108,20 +107,23 @@ router.get("/activeuser", async (req: Request, res: Response) => {
   }
 });
 
-router.delete("/:id", async (req: Request, res: Response) => {
+router.delete("/delete/:id", async (req: Request, res: Response) => {
   try {
-    const id: string = req.params.id;
+    const id = req.params.id;
     if (!ObjectId.isValid(id)) {
       res.sendStatus(400);
+      return;
     }
-    const objectIds: ObjectId = new ObjectId(id);
-    const result = await deleteUser(objectIds);
-    if (result?.deletedCount === 0) {
+    const objectId = new ObjectId(id);
+    const result = await deleteUser(objectId);
+
+    if (result?.deletedCount !== undefined && result.deletedCount > 0) {
+      res.sendStatus(204);
+    } else {
       res.sendStatus(404);
     }
-    res.sendStatus(204);
   } catch (error) {
-    console.error("wrong with deleting user", error);
+    console.error("Error deleting user", error);
     res.sendStatus(500);
   }
 });

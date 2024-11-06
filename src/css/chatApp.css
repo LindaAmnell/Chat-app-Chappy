@@ -12,6 +12,8 @@
   align-self: center;
 }
 .side-bar {
+  display: flex;
+  flex-direction: column;
   background-color: hsla(158, 54%, 32%, 1);
   background-image: radial-gradient(
       at 20% 39%,
@@ -27,6 +29,7 @@
   border: solid 1px black;
   margin: 0 1em 0 1em;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  height: 90vh;
 }
 .room-div {
   display: flex;
@@ -136,6 +139,4 @@
   border-radius: 0.6em;
   font-size: 15px;
   margin: 0.5em;
-}
-.leav-guest {
 }

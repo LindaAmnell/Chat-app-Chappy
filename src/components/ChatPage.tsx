@@ -108,7 +108,7 @@ const ChatPage = () => {
             </div>
           </div>
         )}
-        <div></div>
+
         <RenderRooms />
         <DmNames />
         <div className="sign-user-div">

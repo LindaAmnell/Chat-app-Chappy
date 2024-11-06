@@ -6,8 +6,17 @@ import { searchUser } from "../data/APIFunctions/searchUser.ts";
 import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
 import { CgProfile } from "react-icons/cg";
 
+import { ProfileSettings } from "./ProfileSettings.tsx";
+
 const Header = () => {
-  const { username, setUsername, setUserImage, userImage } = useStore();
+  const {
+    username,
+    setUsername,
+    setUserImage,
+    userImage,
+    isProfileSettingsVisible,
+    toggleProfileSettings,
+  } = useStore();
 
   const handelUser = async () => {
     if (username !== "Guest") {
@@ -24,6 +33,11 @@ const Header = () => {
           console.log("No matched user found.");
         }
       }
+    }
+  };
+  const handelProfile = () => {
+    if (username !== "Guest") {
+      toggleProfileSettings(true);
     }
   };
 
@@ -47,9 +61,11 @@ const Header = () => {
         ) : (
           <CgProfile className="profile-image-icon" />
         )}
-
+        {isProfileSettingsVisible && <ProfileSettings />}
         {username && <p className="sign-in-name">{username}</p>}
-        <p className="icon">⚙️</p>
+        <p onClick={handelProfile} className="icon">
+          ⚙️
+        </p>
       </div>
     </header>
   );

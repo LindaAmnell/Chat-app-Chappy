@@ -41,7 +41,6 @@ const Dms = () => {
       setSortedDms(sortedDms);
       scrollToBottom();
     }
-    console.log("dms", sortedDms);
   };
   useEffect(() => {
     handleGet();
@@ -68,7 +67,6 @@ const Dms = () => {
     });
 
     if (response.status !== 201) {
-      console.log("try again 3");
       return;
     }
     setMessageDm("");

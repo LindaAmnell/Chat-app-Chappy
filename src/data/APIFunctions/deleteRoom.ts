@@ -7,7 +7,6 @@ export const deleteRoom = async (name: string) => {
       },
     });
     if (response.status === 200 || response.status === 204) {
-      console.log("Room deleted successfully");
     } else {
       console.error("Failed to delete room. Status code:", response.status);
     }

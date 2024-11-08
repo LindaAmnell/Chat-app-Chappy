@@ -34,7 +34,6 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
       const users = await searchUser(activeUserName);
       if (users && users.length > 0) {
         setUser(users[0]);
-        // setUpdatedName(activeUserName);
       }
     }
   };

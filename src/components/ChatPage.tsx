@@ -2,6 +2,7 @@ import "../css/chatApp.css";
 import "../css/addroom.css";
 import { useEffect, useState } from "react";
 import { FiArrowLeftCircle } from "react-icons/fi";
+import { listOfPicturesRoom } from "../assets/picToRooms.ts";
 
 import { FaPlus } from "react-icons/fa6";
 import { RenderRooms } from "./RenderRooms.tsx";
@@ -51,6 +52,9 @@ const ChatPage = () => {
       setRoomList(updatedRooms);
     }
   };
+  const handlePictures = (picture: string) => {
+    setRoomImageValue(picture);
+  };
 
   return (
     <main>
@@ -87,6 +91,17 @@ const ChatPage = () => {
                     type="text"
                     onChange={(e) => setRoomImageValue(e.target.value)}
                   />
+                  <div className="chose-pic">
+                    {listOfPicturesRoom.map((picture) => (
+                      <img
+                        key={picture}
+                        src={picture}
+                        className="profile-image"
+                        onClick={() => handlePictures(picture)}
+                      />
+                    ))}
+                  </div>
+
                   <div>
                     <label>Locked Room</label>
 

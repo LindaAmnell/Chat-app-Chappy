@@ -24,7 +24,6 @@ const RenderRooms = () => {
     navigate(`/chat-room/${room.name}`, {});
   };
   const handleDelet = async (room: { name: string }) => {
-    console.log("Deleting room with name:", room.name);
     if (!room.name) {
       console.log("Room name is missing!");
       return;

@@ -67,7 +67,7 @@ const ChatRooms = () => {
       body: JSON.stringify(data),
     });
     if (response.status !== 201) {
-      console.log("try again 3");
+      console.log("try again ");
       return;
     }
     setMessageRoom("");

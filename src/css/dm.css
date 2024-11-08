@@ -119,7 +119,7 @@
   transform: translate(-50%, -50%);
   border: 2px solid rgb(216, 210, 210);
   background-color: var(--box-color);
-  height: 84vh;
+  height: 75vh;
   padding: 2.3em;
   overflow: scroll;
 }

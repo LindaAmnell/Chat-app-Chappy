@@ -47,7 +47,8 @@ header {
   display: flex;
   top: 45%;
   left: 50%;
-  height: 80vh;
+  height: 65vh;
+  width: 30vh;
   transform: translate(-50%, -50%);
   background-color: var(--box-color);
   padding: 1.4em;

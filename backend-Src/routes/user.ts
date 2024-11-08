@@ -31,7 +31,6 @@ router.get("/", async (_, res: Response<WithId<User>[]>) => {
 });
 
 router.post("/login", async (req: Request, res: Response) => {
-  console.log("går in i post");
   if (!process.env.SECRET) {
     res.sendStatus(500);
     return;

@@ -7,6 +7,7 @@ export const roomSchema = Joi.defaults((schema) => {
   name: Joi.string().min(1).required(),
   image: Joi.string().min(1).required(),
   status: Joi.boolean().required(),
+  creator: Joi.string().min(1).required(),
 });
 
 export function isValidRoom(room: Room): boolean {

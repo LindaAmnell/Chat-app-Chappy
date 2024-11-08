@@ -2,6 +2,7 @@ export type NewRoom = {
   name: string;
   image: string;
   status: boolean;
+  creator: string;
 };
 
 export const addRoom = async (newRoom: NewRoom) => {

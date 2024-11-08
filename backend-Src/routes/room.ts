@@ -1,5 +1,5 @@
 import express, { Response, Router, Request } from "express";
-import { ObjectId, WithId } from "mongodb";
+import { WithId } from "mongodb";
 import { Room } from "../interfaces/Room.js";
 import { getAllRooms } from "../mongoDb/Room/getAllRooms.js";
 import { creatRoom } from "../mongoDb/Room/creatRoom.js";
@@ -34,23 +34,22 @@ router.post("/", async (req: Request, res: Response) => {
     res.sendStatus(400);
   }
 });
-router.delete("/delete/:id", async (req: Request, res: Response) => {
+router.delete("/delete/:name", async (req: Request, res: Response) => {
   try {
-    const id = req.params.id;
-    if (!ObjectId.isValid(id)) {
-      res.sendStatus(400);
+    const roomName = req.params.name;
+    if (!roomName) {
+      res.status(400).send({ error: "Room name is required" });
       return;
     }
-    const objectId = new ObjectId(id);
-    const result = await deleteRoom(objectId);
+    const result = await deleteRoom(roomName);
 
     if (result?.deletedCount !== undefined && result.deletedCount > 0) {
       res.sendStatus(204);
     } else {
-      res.sendStatus(404);
+      res.status(404).send({ error: "Room not found" });
     }
   } catch (error) {
-    console.error("Error deleting user", error);
+    console.error("Error deleting room:", error);
     res.sendStatus(500);
   }
 });

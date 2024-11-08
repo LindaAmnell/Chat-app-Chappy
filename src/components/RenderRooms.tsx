@@ -3,9 +3,11 @@ import { FaUnlock } from "react-icons/fa";
 import { useEffect, useCallback } from "react";
 import { useStore } from "../data/storeHooks.ts";
 import { useNavigate } from "react-router-dom";
+import { BsTrash3Fill } from "react-icons/bs";
+import { deleteRoom } from "../data/APIFunctions/deleteRoom.ts";
 
 const RenderRooms = () => {
-  const { setRoomList, roomList, setRoomImage } = useStore();
+  const { setRoomList, roomList, setRoomImage, username } = useStore();
   const navigate = useNavigate();
   const handelGet = useCallback(async () => {
     const result = await getRooms();
@@ -21,6 +23,15 @@ const RenderRooms = () => {
     setRoomImage(room.image);
     navigate(`/chat-room/${room.name}`, {});
   };
+  const handleDelet = async (room: { name: string }) => {
+    console.log("Deleting room with name:", room.name);
+    if (!room.name) {
+      console.log("Room name is missing!");
+      return;
+    }
+    await deleteRoom(room.name);
+    handelGet();
+  };
 
   return (
     <div className="div-room">
@@ -34,6 +45,12 @@ const RenderRooms = () => {
           {room.status === true && (
             <p className="locked">
               <FaUnlock />
+            </p>
+          )}
+          {room.creator === username && (
+            <p>
+              {" "}
+              <BsTrash3Fill onClick={() => handleDelet(room)} />
             </p>
           )}
         </div>

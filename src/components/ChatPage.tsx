@@ -12,7 +12,7 @@ import { Header } from "./Header.tsx";
 import { addRoom } from "../data/APIFunctions/addRoom.ts";
 import { getRooms } from "../data/APIFunctions/getRooms.ts";
 const ChatPage = () => {
-  const { setUsername, setRoomList } = useStore();
+  const { setUsername, setRoomList, username } = useStore();
   const [roomNameValue, setRoomNameValue] = useState("");
   const [roomImageValue, setRoomImageValue] = useState("");
   const [isLocked, setIsLocked] = useState<boolean>(false);
@@ -34,6 +34,7 @@ const ChatPage = () => {
       name: roomNameValue,
       status: isLocked,
       image: roomImageValue,
+      creator: username,
     };
     const roomData = await addRoom(newRoom);
     if (roomData) {

@@ -117,7 +117,7 @@ const ChatRooms = () => {
             value={messageRoom}
             onChange={(e) => setMessageRoom(e.target.value)}
             className="input-dm"
-            placeholder="Skriv ett meddelande..."
+            placeholder="Write a message..."
           />
           <button className="send-btn" onClick={handlePostRoom}>
             Send

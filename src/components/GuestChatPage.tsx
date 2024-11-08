@@ -37,6 +37,11 @@ const GuestChatPage = () => {
     navigate("/");
     localStorage.removeItem("username");
   };
+  const handleLogin = () => {
+    setUsername("");
+    navigate("/");
+    localStorage.removeItem("username");
+  };
 
   return (
     <>
@@ -62,7 +67,9 @@ const GuestChatPage = () => {
                 </div>
               ))}
             <div className="sign-guest-div">
-              <button className="sign-in-btn-guest">Sign in</button>
+              <button onClick={handleLogin} className="sign-in-btn-guest">
+                Sign in
+              </button>
               <button className="leav-guest" onClick={handleLogutGuest}>
                 Leave
               </button>

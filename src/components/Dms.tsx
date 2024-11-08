@@ -112,7 +112,7 @@ const Dms = () => {
             value={messageDm}
             onChange={(e) => setMessageDm(e.target.value)}
             className="input-dm"
-            placeholder="Skriv ett meddelande..."
+            placeholder="Write a message..."
           />
           <button className="send-btn" onClick={handlePostDm}>
             Send

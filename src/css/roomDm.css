@@ -14,16 +14,15 @@
 .get-back-arow {
   height: 2em;
   width: 2em;
-  position: fixed;
-  top: 11%;
-  left: 10%;
-  transform: translate(-50%, -50%);
+  position: absolute;
   color: white;
 }
 .room-dm {
   display: flex;
   flex-direction: column;
+  position: relative;
   margin: 0.5em;
+  margin: auto;
 }
 .signd-in-user {
   color: var(--text-color);
@@ -67,7 +66,7 @@
   .room-message::-webkit-scrollbar {
     display: none;
   }
-  .get-back-arow {
-    left: 20%;
+  .room-dm {
+    max-width: 700px;
   }
 }

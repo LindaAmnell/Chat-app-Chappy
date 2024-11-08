@@ -7,7 +7,6 @@ import { ChatPage } from "../components/ChatPage.js";
 import { Dms } from "../components/Dms.js";
 import { ChatRooms } from "../components/ChatRooms.js";
 import { GuestChatPage } from "../components/GuestChatPage.js";
-// import { ProfileSettings } from "../components/ProfileSettings.js";
 
 const router = createHashRouter([
   {
@@ -42,10 +41,6 @@ const router = createHashRouter([
         path: "/guestchatPage",
         element: <GuestChatPage />,
       },
-      //   {
-      //     path: "/profilePage",
-      //     element: <ProfileSettings handleUsers={handleUser} />,
-      //   },
     ],
   },
 ]);

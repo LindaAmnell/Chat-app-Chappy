@@ -65,3 +65,9 @@ input {
   margin-top: -0.7em;
   margin-bottom: 0.5em;
 }
+.set-profile {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+}

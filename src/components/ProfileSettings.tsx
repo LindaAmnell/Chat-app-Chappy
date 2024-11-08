@@ -34,7 +34,7 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
       const users = await searchUser(activeUserName);
       if (users && users.length > 0) {
         setUser(users[0]);
-        setUpdatedName(activeUserName);
+        // setUpdatedName(activeUserName);
       }
     }
   };
@@ -62,8 +62,9 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
           setUser({ ...user, name: updatedName });
         } else {
           setUser({ ...user, image: updatedImage, name: updatedName });
-          handleUsers();
+          setUpdatedName("");
         }
+        handleUsers();
       } catch (error) {
         console.error("Failed to save changes:", error);
       }
@@ -125,7 +126,7 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
             value={updatedName}
             onChange={(e) => handleNameChange(e)}
             autoComplete="name"
-            placeholder="Name"
+            placeholder={user?.name}
           />
           <label htmlFor="Image">Image</label>
           <input
@@ -134,7 +135,7 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
             value={updatedImage}
             onChange={(e) => setUpdatedImage(e.target.value)}
             autoComplete="url"
-            placeholder="Image URL"
+            placeholder={user?.image}
           />
         </form>
       </div>

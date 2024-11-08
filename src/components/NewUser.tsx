@@ -6,6 +6,7 @@ import { createUser } from "../data/APIFunctions/createUser";
 import { useState } from "react";
 import { User } from "../models/User";
 import { useStore } from "../data/storeHooks.ts";
+import { listOfPictures } from "../assets/profilePic.ts";
 
 const LS_KEY = "JWT-DEMO--TOKEN";
 
@@ -86,6 +87,9 @@ const NewUser = () => {
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, image: e.target.value });
   };
+  const handlePictures = (picture: string) => {
+    setUser({ ...user, image: picture });
+  };
   const handleLogInNewUser = async () => {
     navigate("/chatPage");
   };
@@ -136,6 +140,16 @@ const NewUser = () => {
             onChange={handleImage}
           />
           {imageError && <span className="error-msg">{imageError} </span>}
+          <div className="set-profile">
+            {listOfPictures.map((picture) => (
+              <img
+                key={picture}
+                src={picture}
+                className="profile-image"
+                onClick={() => handlePictures(picture)}
+              />
+            ))}
+          </div>
           <button className="create-btn" onClick={handleCreateUser}>
             Create new user
           </button>

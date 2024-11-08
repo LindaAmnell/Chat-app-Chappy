@@ -27,6 +27,8 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
   const navigate = useNavigate();
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [userError, setUserError] = useState("");
+  const [usernameNotavailableError, setUsernameNotavailableError] =
+    useState("");
 
   const handelUser = async () => {
     const activeUserName = await getActiveUser();
@@ -45,14 +47,33 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
     const updatedUserData: UpdatedUserData = {};
     if (updatedName) updatedUserData.name = updatedName;
     if (updatedImage) updatedUserData.image = updatedImage;
+    setUserError("");
+    setUsernameNotavailableError("");
+
     if (updatedName && user?._id) {
       const id = user._id;
+      if (updatedName.length > 14) {
+        setUserError("Username must be 14 characters or less.");
+        return;
+      }
+      if (updatedName.length < 4) {
+        setUserError("Username must be at least 4 characters.");
+        return;
+      }
       try {
         const response = await updateUser(updatedUserData, id);
+
+        if (response?.status === 409) {
+          console.log("fel");
+          const errorData = await response.json();
+          setUsernameNotavailableError(
+            errorData.message || "Username unavailable"
+          );
+          return;
+        }
         if (response?.token) {
           localStorage.setItem(LS_KEY, response.token);
         }
-
         if (updatedName !== user.name) {
           await updateDm(user.name, updatedName);
           await updateRoomMessages(user.name, updatedName);
@@ -66,6 +87,7 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
         handleUsers();
       } catch (error) {
         console.error("Failed to save changes:", error);
+        setUsernameNotavailableError("Username unavailable");
       }
     }
   };
@@ -95,12 +117,6 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newName = e.target.value;
     setUpdatedName(newName);
-    if (updatedName.length > 14) {
-      setUserError("Username too long");
-    }
-    if (updatedName.length < 4) {
-      setUserError("Username too short");
-    }
   };
 
   useEffect(() => {
@@ -114,10 +130,13 @@ const ProfileSettings = ({ handleUsers }: Prop) => {
       <div>
         <div className="profile-info">
           <p>{user?.name}</p>
-          {userError && <span className="error-msg">{userError} </span>}
           <img className="profile-image" src={user?.image} alt="Profile" />
         </div>
         <form className="input-div">
+          {usernameNotavailableError && (
+            <span className="error-msg">{usernameNotavailableError} </span>
+          )}
+          {userError && <span className="error-msg">{userError} </span>}
           <label htmlFor="Name">Name</label>
           <input
             id="Name"

@@ -118,29 +118,43 @@ router.put(
   "/change-user/:id",
   async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id;
+    const newUser: User = req.body;
 
     if (!ObjectId.isValid(id)) {
       res.sendStatus(400);
       return;
     }
     const objectId: ObjectId = new ObjectId(id);
-    const updatedFields: User = req.body;
+    try {
+      const users = await getAllUser();
+      const usernameExists = users.some(
+        (user) => user.name.toLowerCase() === newUser.name?.toLowerCase()
+      );
+      if (usernameExists) {
+        res.status(409).json({ message: "Username already taken." });
+        return;
+      }
+      const updatedFields: User = req.body;
+      if (isValidChangeUser(updatedFields)) {
+        const result = await updateUser(objectId, newUser);
 
-    if (isValidChangeUser(updatedFields)) {
-      const result = await updateUser(objectId, updatedFields);
-      if (result?.matchedCount === 0) {
-        res.sendStatus(404);
-      } else {
-        if (updatedFields.name && process.env.SECRET) {
-          const newPayload = { userId: updatedFields.name };
-          const newToken = jwt.sign(newPayload, process.env.SECRET);
+        if (result?.matchedCount === 0) {
+          res.status(404).json({ message: "User not found." });
+          return;
+        }
+        if (newUser.name && process.env.SECRET) {
+          const newToken = jwt.sign(
+            { userId: newUser.name },
+            process.env.SECRET
+          );
           res.status(200).json({ token: newToken });
         } else {
           res.sendStatus(204);
         }
       }
-    } else {
-      res.sendStatus(400);
+    } catch (err) {
+      console.error("Error updating user:", err);
+      res.status(500).json({ message: "An error occurred." });
     }
   }
 );

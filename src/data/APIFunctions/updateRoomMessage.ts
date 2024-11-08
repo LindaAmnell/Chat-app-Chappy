@@ -21,8 +21,6 @@ export const updateRoomMessages = async (
     if (!response.ok) {
       throw new Error("Failed to update room messages");
     }
-
-    console.log("Messages updated successfully");
   } catch (error) {
     console.error("Error updating room messages:", error);
     throw error;

@@ -14,12 +14,12 @@ export const updateUser = async (
     throw new Error("Failed to update user");
   }
   if (response.status === 204) {
-    return {};
+    return response;
   }
   try {
     return await response.json();
   } catch (err) {
     console.error("Error parsing JSON response:", err);
-    return {};
+    return response;
   }
 };

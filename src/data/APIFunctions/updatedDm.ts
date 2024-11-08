@@ -22,8 +22,6 @@ export const updateDm = async (
     if (!response.ok) {
       throw new Error("Failed to update dm");
     }
-
-    console.log("dm updated successfully");
   } catch (error) {
     console.error("Error updating dm:", error);
     throw error;

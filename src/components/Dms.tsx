@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from "react";
 import { useStore } from "../data/storeHooks.ts";
 import { getProtectedMatchingDms } from "../data/APIFunctions/getProtectedMatchingDms.ts";
 import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
+import { Header } from "./Header.tsx";
 
 const Dms = () => {
   const { name } = useParams<{ name: string }>();
@@ -79,45 +80,48 @@ const Dms = () => {
   };
 
   return (
-    <section className="dm-section">
-      <NavLink to="/chatPage">
-        <FiArrowLeftCircle className="back-arrow-dm" />
-      </NavLink>
-      <h2 className="name-dm">{name}</h2>
-      <div className="messages-container" ref={messageDivRef}>
-        {sortedDms && sortedDms.length > 0 ? (
-          sortedDms.map((dm) => (
-            <div
-              className={`div-dms ${
-                dm.senderName === username ? "active-user" : "other-user"
-              }`}
-              key={dm._id}>
-              <p className="sender-name">{dm.senderName}</p>
-              <p
-                className={`text-message ${
-                  dm.senderName === username ? "active-user-message" : ""
-                }`}>
-                {dm.textMessage}
-              </p>
-              <p className="date">{new Date(dm.date).toLocaleString()}</p>
-            </div>
-          ))
-        ) : (
-          <p>Inga meddelanden</p>
-        )}
-      </div>
-      <div className="message-input">
-        <textarea
-          value={messageDm}
-          onChange={(e) => setMessageDm(e.target.value)}
-          className="input-dm"
-          placeholder="Skriv ett meddelande..."
-        />
-        <button className="send-btn" onClick={handlePostDm}>
-          Send
-        </button>
-      </div>
-    </section>
+    <>
+      <Header />
+      <section className="dm-section">
+        <NavLink to="/chatPage">
+          <FiArrowLeftCircle className="back-arrow-dm" />
+        </NavLink>
+        <h2 className="name-dm">{name}</h2>
+        <div className="messages-container" ref={messageDivRef}>
+          {sortedDms && sortedDms.length > 0 ? (
+            sortedDms.map((dm) => (
+              <div
+                className={`div-dms ${
+                  dm.senderName === username ? "active-user" : "other-user"
+                }`}
+                key={dm._id}>
+                <p className="sender-name">{dm.senderName}</p>
+                <p
+                  className={`text-message ${
+                    dm.senderName === username ? "active-user-message" : ""
+                  }`}>
+                  {dm.textMessage}
+                </p>
+                <p className="date">{new Date(dm.date).toLocaleString()}</p>
+              </div>
+            ))
+          ) : (
+            <p>Inga meddelanden</p>
+          )}
+        </div>
+        <div className="message-input">
+          <textarea
+            value={messageDm}
+            onChange={(e) => setMessageDm(e.target.value)}
+            className="input-dm"
+            placeholder="Skriv ett meddelande..."
+          />
+          <button className="send-btn" onClick={handlePostDm}>
+            Send
+          </button>
+        </div>
+      </section>
+    </>
   );
 };
 export { Dms };

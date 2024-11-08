@@ -31,6 +31,15 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   height: 90vh;
 }
+.room {
+  display: flex;
+}
+
+.room {
+  display: flex;
+  flex-direction: column;
+}
+
 .room-div {
   display: flex;
   gap: 0.4em;
@@ -39,7 +48,7 @@
 .div-room {
   border-bottom: solid 1px black;
   margin-left: 0.5em;
-  max-height: 240px;
+  max-height: 300px;
   overflow-y: auto;
 }
 .add-button-container {
@@ -52,7 +61,6 @@
   width: 1.5em;
   color: var(--text-color);
   border: solid 1px var(--button-color);
-  /* margin-top: 0.7em; */
   cursor: pointer;
 }
 .add-button-container:hover::after {
@@ -120,23 +128,48 @@
   opacity: 0.4;
 }
 .div-room-guest {
-  margin-left: 0.5em;
-  max-height: 600px;
-  overflow-y: auto;
-  padding: 0.5em;
-}
-.sign-guest-div {
-  margin-top: 1em;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
+  margin-left: 0.5em;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.sign-guest-div {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  width: 10em;
   padding-bottom: 1em;
+  gap: 1em;
+  align-self: center;
 }
 
 .sign-in-btn-guest {
-  padding: 0.4em;
-  border-radius: 0.6em;
   font-size: 15px;
-  margin: 0.5em;
+}
+
+@media (min-width: 600px) {
+  .chat-page {
+    align-items: center;
+  }
+  .side-bar {
+    min-width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 90vh;
+  }
+  .room {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .div-room {
+    border-bottom: none;
+    max-height: 500px;
+  }
+  .div-room-guest {
+    flex-grow: 1;
+  }
 }

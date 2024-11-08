@@ -5,10 +5,14 @@ import jwt from "jsonwebtoken";
 import { getAllUser } from "../mongoDb/User/getAllUser.js";
 import { getOneUser } from "../mongoDb/User/getOneUser.js";
 import { searchUser } from "../mongoDb/User/searchUser.js";
-import { isValidUser } from "../data/validation/validationUser.js";
+import {
+  isValidChangeUser,
+  isValidUser,
+} from "../data/validation/validationUser.js";
 import { creatUser } from "../mongoDb/User/creatUser.js";
 import { deleteUser } from "../mongoDb/User/deleteUser.js";
 import { validateLogin } from "../data/validation/validateLogin.js";
+import { updateUser } from "../mongoDb/User/updateUser.js";
 import { Payload } from "./dm.js";
 export const router: Router = express.Router();
 
@@ -68,7 +72,11 @@ router.get("/search", async (req, res) => {
 
 router.post("/", async (req: Request, res: Response) => {
   const newUser: User = req.body;
-  if (isValidUser(newUser)) {
+  const users = await getAllUser();
+  const usernameAvailability = users.find((user) => user.name === newUser.name);
+  if (usernameAvailability) {
+    res.sendStatus(409);
+  } else if (isValidUser(newUser) && usernameAvailability === undefined) {
     try {
       await creatUser(newUser);
       res.sendStatus(201);
@@ -106,6 +114,37 @@ router.get("/activeuser", async (req: Request, res: Response) => {
     res.sendStatus(400);
   }
 });
+
+router.put(
+  "/change-user/:id",
+  async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
+
+    if (!ObjectId.isValid(id)) {
+      res.sendStatus(400);
+      return;
+    }
+    const objectId: ObjectId = new ObjectId(id);
+    const updatedFields: User = req.body;
+
+    if (isValidChangeUser(updatedFields)) {
+      const result = await updateUser(objectId, updatedFields);
+      if (result?.matchedCount === 0) {
+        res.sendStatus(404);
+      } else {
+        if (updatedFields.name && process.env.SECRET) {
+          const newPayload = { userId: updatedFields.name };
+          const newToken = jwt.sign(newPayload, process.env.SECRET);
+          res.status(200).json({ token: newToken });
+        } else {
+          res.sendStatus(204);
+        }
+      }
+    } else {
+      res.sendStatus(400);
+    }
+  }
+);
 
 router.delete("/delete/:id", async (req: Request, res: Response) => {
   try {

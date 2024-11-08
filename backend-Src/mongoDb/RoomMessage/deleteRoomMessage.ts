@@ -10,7 +10,6 @@ async function deleteRoomMessage(name: string) {
     const filter = {
       $or: [{ receiverName: name }, { senderName: name }],
     };
-    console.log("filet är", filter);
     const result: DeleteResult = await col.deleteMany(filter);
     if (!result.acknowledged) {
       console.log("Could not delete any message");

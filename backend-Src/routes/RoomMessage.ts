@@ -5,6 +5,7 @@ import { isValidRoomMessage } from "../data/validation/valodateRoomMessage.js";
 import { getAllRoomMessage } from "../mongoDb/RoomMessage/getAllRoomMessage.js";
 import { creatRoomMessage } from "../mongoDb/RoomMessage/creatRoomMessage.js";
 import { deleteRoomMessage } from "../mongoDb/RoomMessage/deleteRoomMessage.js";
+import { updatedRoomMessages } from "../mongoDb/RoomMessage/updatedRoomMessage.js";
 
 export const router: Router = express.Router();
 
@@ -35,6 +36,33 @@ router.post("/", async (req: Request, res: Response) => {
     res.sendStatus(400);
   }
 });
+router.put(
+  "/update-user-messages",
+  async (req: Request, res: Response): Promise<void> => {
+    const { oldName, newName } = req.body;
+
+    if (!oldName || !newName) {
+      res.status(400).send({ error: "Old name and new name are required." });
+      return;
+    }
+
+    try {
+      const result = await updatedRoomMessages(oldName, newName);
+
+      if (result.matchedCount === 0) {
+        console.log("No messages found to update.");
+        res.status(404).send({ message: "No messages found to update." });
+        return;
+      }
+      res
+        .status(200)
+        .send({ message: `Updated ${result.matchedCount} messages.` });
+    } catch (error) {
+      console.error("Error updating user messages:", error);
+      res.sendStatus(500);
+    }
+  }
+);
 
 router.delete("/delete-message", async (req: Request, res: Response) => {
   const { name } = req.body;

@@ -1,25 +1,28 @@
 .back-arrow-dm {
   height: 2em;
   width: 2em;
-  position: absolute;
-  top: 3%;
-  left: 5%;
+  position: fixed;
+  top: 10.5%;
+  left: 8%;
+  transform: translate(-50%, -50%);
   color: white;
 }
 .dm-section {
   display: flex;
   flex-direction: column;
+  height: 100%;
   margin-top: 1em;
   margin: 0.5em;
 }
 .div-dm {
   display: flex;
   flex-direction: column;
-  max-height: 160px;
-  min-height: 160px;
-  overflow-y: auto;
   margin-left: 0.5em;
+  overflow-y: auto;
+  max-height: calc(60vh - 200px);
+  min-height: 130px;
 }
+
 .send-dm-div {
   display: flex;
   gap: 1em;
@@ -109,15 +112,13 @@
   width: 1.5em;
 }
 .user-search {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 2%;
-  left: 3%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: 2px solid rgb(216, 210, 210);
   background-color: var(--box-color);
   height: 84vh;
-  min-width: 14em;
   padding: 2.3em;
   overflow: scroll;
 }
@@ -143,4 +144,45 @@
   align-self: center;
   background-color: rgb(6, 112, 73);
   color: white;
+}
+@media (min-width: 600px) {
+  .messages-container {
+    min-height: 500px;
+    max-width: 600px;
+    margin: auto;
+    min-width: 600px;
+  }
+  .messages-container::-webkit-scrollbar {
+    display: none;
+  }
+  .user-search::-webkit-scrollbar {
+    display: none;
+  }
+  .back-arrow-dm {
+    left: 9%;
+    top: 11%;
+  }
+  .div-dm {
+    max-height: calc(100vh - 250px);
+    width: 250px;
+  }
+}
+@media (min-width: 800px) {
+  .back-arrow-dm {
+    left: 22%;
+  }
+}
+@media (min-width: 1000px) {
+  .back-arrow-dm {
+    left: 30%;
+  }
+  .div-dm {
+    max-height: calc(100vh - 300px);
+  }
+}
+@media (min-width: 1450px) {
+  .back-arrow-dm {
+    left: 35%;
+    top: 9%;
+  }
 }

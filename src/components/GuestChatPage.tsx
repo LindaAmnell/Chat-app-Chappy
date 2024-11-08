@@ -1,6 +1,6 @@
 import "../css/chatApp.css";
 import { useEffect, useCallback } from "react";
-import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
+
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../data/storeHooks.ts";
 import { getRooms } from "../data/APIFunctions/getRooms.ts";
@@ -40,40 +40,38 @@ const GuestChatPage = () => {
   };
 
   return (
-    <section className="chat-page">
+    <>
       <Header />
-      <div>
-        <img className="chappy-chat-page" src={chappyDragon} alt="" />
-      </div>
-      <div className="side-bar">
-        <div className="div-room-guest">
-          <h2 className="chat-page-h2">Rooms:</h2>
-          {roomList &&
-            roomList.map((room) => (
-              <div className="rooms" key={room._id}>
-                <img className="room-image" src={room.image} alt="" />
-                <p
-                  onClick={() => handleClickRoom(room)}
-                  className={`room-name ${room.status ? "locked-room" : ""}`}>
-                  {room.name}
-                </p>
-                {room.status === true && (
-                  <p className="locked">
-                    <FaLock />
+      <section className="chat-page">
+        <div className="side-bar">
+          <div className="div-room-guest">
+            <h2 className="chat-page-h2">Rooms:</h2>
+            {roomList &&
+              roomList.map((room) => (
+                <div className="rooms" key={room._id}>
+                  <img className="room-image" src={room.image} alt="" />
+                  <p
+                    onClick={() => handleClickRoom(room)}
+                    className={`room-name ${room.status ? "locked-room" : ""}`}>
+                    {room.name}
                   </p>
-                )}
-              </div>
-            ))}
+                  {room.status === true && (
+                    <p className="locked">
+                      <FaLock />
+                    </p>
+                  )}
+                </div>
+              ))}
+            <div className="sign-guest-div">
+              <button className="sign-in-btn-guest">Sign in</button>
+              <button className="leav-guest" onClick={handleLogutGuest}>
+                Leave
+              </button>
+            </div>
+          </div>
         </div>
-
-        <div className="sign-guest-div">
-          <button className="sign-in-btn-guest">Sign in</button>
-          <button className="leav-guest" onClick={handleLogutGuest}>
-            Leave
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 export { GuestChatPage };

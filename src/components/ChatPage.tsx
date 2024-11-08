@@ -2,7 +2,7 @@ import "../css/chatApp.css";
 import "../css/addroom.css";
 import { useEffect, useState } from "react";
 import { FiArrowLeftCircle } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+
 import { FaPlus } from "react-icons/fa6";
 import { RenderRooms } from "./RenderRooms.tsx";
 import { useStore } from "../data/storeHooks.ts";
@@ -11,11 +11,8 @@ import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 import { Header } from "./Header.tsx";
 import { addRoom } from "../data/APIFunctions/addRoom.ts";
 import { getRooms } from "../data/APIFunctions/getRooms.ts";
-const LS_KEY = "JWT-DEMO--TOKEN";
-
 const ChatPage = () => {
-  const navigate = useNavigate();
-  const { setUsername, setUserImage, setRoomList } = useStore();
+  const { setUsername, setRoomList } = useStore();
   const [roomNameValue, setRoomNameValue] = useState("");
   const [roomImageValue, setRoomImageValue] = useState("");
   const [isLocked, setIsLocked] = useState<boolean>(false);
@@ -32,12 +29,6 @@ const ChatPage = () => {
     fetchAndSetActiveUser();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem(LS_KEY);
-    setUserImage("");
-    setUsername("");
-    navigate("/");
-  };
   const handleAddRoom = async () => {
     const newRoom = {
       name: roomNameValue,
@@ -61,63 +52,62 @@ const ChatPage = () => {
   };
 
   return (
-    <section className="chat-page">
+    <main>
       <Header />
-      <div></div>
-      <div className="side-bar">
-        <div className="room-div">
-          <h2 className="chat-page-h2">Rooms:</h2>
-          <div className="add-button-container">
-            <FaPlus
-              onClick={() => setIsVisible(!isVisible)}
-              className="add-button"
-            />
-          </div>
-        </div>
-        {isVisible && (
-          <div className="add-room-div">
-            <FiArrowLeftCircle
-              onClick={() => setIsVisible(false)}
-              className="get-back"
-            />
-            <p>Add new room</p>
-            <div className="add-input-div">
-              <label>Name</label>
-              <input
-                value={roomNameValue}
-                type="text"
-                onChange={(e) => setRoomNameValue(e.target.value)}
-              />
-              <label>Image</label>
-              <input
-                value={roomImageValue}
-                type="text"
-                onChange={(e) => setRoomImageValue(e.target.value)}
-              />
-              <div>
-                <label>Locked Room</label>
-
-                <input
-                  checked={isLocked}
-                  onChange={() => setIsLocked(!isLocked)}
-                  className="checkbox"
-                  type="checkbox"
+      <section className="chat-page">
+        <div className="side-bar">
+          <div className="room">
+            <div className="room-div">
+              <h2 className="chat-page-h2">Rooms:</h2>
+              <div className="add-button-container">
+                <FaPlus
+                  onClick={() => setIsVisible(!isVisible)}
+                  className="add-button"
                 />
               </div>
-              <button onClick={handleAddRoom}>Add Room</button>
             </div>
-          </div>
-        )}
+            {isVisible && (
+              <div className="add-room-div">
+                <FiArrowLeftCircle
+                  onClick={() => setIsVisible(false)}
+                  className="get-back"
+                />
+                <p>Add new room</p>
+                <div className="add-input-div">
+                  <label>Name</label>
+                  <input
+                    value={roomNameValue}
+                    type="text"
+                    onChange={(e) => setRoomNameValue(e.target.value)}
+                  />
+                  <label>Image</label>
+                  <input
+                    value={roomImageValue}
+                    type="text"
+                    onChange={(e) => setRoomImageValue(e.target.value)}
+                  />
+                  <div>
+                    <label>Locked Room</label>
 
-        <RenderRooms />
-        <DmNames />
-        <div className="sign-user-div">
-          <button onClick={handleLogout} className="sign-out-btn">
-            Sign Out
-          </button>
+                    <input
+                      checked={isLocked}
+                      onChange={() => setIsLocked(!isLocked)}
+                      className="checkbox"
+                      type="checkbox"
+                    />
+                  </div>
+                  <button onClick={handleAddRoom}>Add Room</button>
+                </div>
+              </div>
+            )}
+            <RenderRooms />
+          </div>
+          <div>
+            <DmNames />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 

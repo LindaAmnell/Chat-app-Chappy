@@ -7,6 +7,7 @@ import { getAllDms } from "../mongoDb/Dm/getAllDms.js";
 import { WithId } from "mongodb";
 import { getMatchingDms } from "../mongoDb/Dm/getMatchingDms.js";
 import { deleteDm } from "../mongoDb/Dm/deleteDm.js";
+import { updatedDm } from "../mongoDb/Dm/updatedDm.js";
 
 export const router: Router = express.Router();
 const { verify } = jwt;
@@ -68,6 +69,34 @@ router.post("/", async (req: Request, res: Response) => {
     res.sendStatus(400);
   }
 });
+router.put(
+  "/update-user-messages",
+  async (req: Request, res: Response): Promise<void> => {
+    const { oldName, newName } = req.body;
+    if (!oldName || !newName) {
+      res
+        .status(400)
+        .send({ error: "Old name, new name, and updateType are required." });
+      return;
+    }
+
+    try {
+      const result = await updatedDm(oldName, newName);
+      if (result?.matchedCount === 0) {
+        console.log("No dms found to update.");
+        res.status(404).send({ message: "No dms found to update." });
+        return;
+      }
+      res
+        .status(200)
+        .send({ message: `Updated ${result?.matchedCount} messages.` });
+    } catch (error) {
+      console.error("Error updating user messages:", error);
+      res.sendStatus(500);
+    }
+  }
+);
+
 router.delete("/delete-dm", async (req: Request, res: Response) => {
   const { name } = req.body;
   console.log("namn", name);

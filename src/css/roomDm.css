@@ -14,9 +14,10 @@
 .get-back-arow {
   height: 2em;
   width: 2em;
-  position: absolute;
-  top: 11.5%;
-  left: 4%;
+  position: fixed;
+  top: 11%;
+  left: 10%;
+  transform: translate(-50%, -50%);
   color: white;
 }
 .room-dm {
@@ -55,4 +56,18 @@
   font-size: 25px;
   padding: 0.4em;
   margin: 0em;
+}
+
+@media (min-width: 700px) {
+  .room-message {
+    min-height: 500px;
+    margin: auto;
+    min-width: 600px;
+  }
+  .room-message::-webkit-scrollbar {
+    display: none;
+  }
+  .get-back-arow {
+    left: 20%;
+  }
 }

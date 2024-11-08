@@ -85,44 +85,46 @@ const ChatRooms = () => {
   };
 
   return (
-    <section className="room-dm">
+    <>
       <Header />
-      <FiArrowLeftCircle onClick={handleBack} className="get-back-arow" />
-      <h2 className="chat-room-name">{room}</h2>
-      <div className="room-message" ref={messageDivRef}>
-        {sortedMessages && sortedMessages.length > 0 ? (
-          sortedMessages.map((roomDm) => (
-            <div
-              className={`room-div-dm ${
-                roomDm.senderName === username ? "active-user" : "other-user"
-              }`}
-              key={roomDm._id}>
-              <p className="sender-name">{roomDm.senderName}</p>
-              <p
-                className={`text-message ${
-                  roomDm.senderName === username ? "active-user-message" : ""
-                }`}>
-                {roomDm.textMessage}
-              </p>
-              <p className="date">{new Date(roomDm.date).toLocaleString()}</p>
-            </div>
-          ))
-        ) : (
-          <p>Inga meddelanden</p>
-        )}
-      </div>
-      <div className="message-input">
-        <textarea
-          value={messageRoom}
-          onChange={(e) => setMessageRoom(e.target.value)}
-          className="input-dm"
-          placeholder="Skriv ett meddelande..."
-        />
-        <button className="send-btn" onClick={handlePostRoom}>
-          Send
-        </button>
-      </div>
-    </section>
+      <section className="room-dm">
+        <FiArrowLeftCircle onClick={handleBack} className="get-back-arow" />
+        <h2 className="chat-room-name">{room}</h2>
+        <div className="room-message" ref={messageDivRef}>
+          {sortedMessages && sortedMessages.length > 0 ? (
+            sortedMessages.map((roomDm) => (
+              <div
+                className={`room-div-dm ${
+                  roomDm.senderName === username ? "active-user" : "other-user"
+                }`}
+                key={roomDm._id}>
+                <p className="sender-name">{roomDm.senderName}</p>
+                <p
+                  className={`text-message ${
+                    roomDm.senderName === username ? "active-user-message" : ""
+                  }`}>
+                  {roomDm.textMessage}
+                </p>
+                <p className="date">{new Date(roomDm.date).toLocaleString()}</p>
+              </div>
+            ))
+          ) : (
+            <p>Inga meddelanden</p>
+          )}
+        </div>
+        <div className="message-input">
+          <textarea
+            value={messageRoom}
+            onChange={(e) => setMessageRoom(e.target.value)}
+            className="input-dm"
+            placeholder="Skriv ett meddelande..."
+          />
+          <button className="send-btn" onClick={handlePostRoom}>
+            Send
+          </button>
+        </div>
+      </section>
+    </>
   );
 };
 

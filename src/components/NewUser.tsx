@@ -6,6 +6,7 @@ import { createUser } from "../data/APIFunctions/createUser";
 import { useState } from "react";
 import { User } from "../models/User";
 import { useStore } from "../data/storeHooks.ts";
+
 const LS_KEY = "JWT-DEMO--TOKEN";
 
 const NewUser = () => {
@@ -15,40 +16,62 @@ const NewUser = () => {
     image: "",
   });
   const [isUserCreated, setIsUserCreated] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const [userError, setUserError] = useState("");
+  const [imageError, setImageError] = useState("");
+  const [usernameNotavailableError, setUsernameNotavailableError] =
+    useState("");
   const { setUsername } = useStore();
   const navigate = useNavigate();
 
   const handleCreateUser = async () => {
-    try {
-      const newUser = { ...user };
-      await createUser(newUser);
-    } catch (error) {
-      console.error("Error creating user:", error);
+    if (user.name.length > 14) {
+      setUserError("Username to long");
+    }
+    if (user.name.length < 4) {
+      setUserError("Username to short");
+    }
+    if (user.password.length < 8) {
+      setPasswordError("Password to short");
+    }
+    if (user.image === "") {
+      setImageError("Pleas insert Url");
     }
 
-    setIsUserCreated(true);
-
     try {
-      const username = user.name;
-      const password = user.password;
-      const data = { username, password };
-      const response = await fetch("/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const newUser = { ...user };
+      const response = await createUser(newUser);
+      if (response?.status === 409) {
+        setUsernameNotavailableError("Username unavailable");
+      } else {
+        try {
+          const username = user.name;
+          const password = user.password;
+          const data = { username, password };
+          const response = await fetch("/api/user/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
 
-      if (response.status !== 200) {
-        return;
+          if (response.status !== 200) {
+            return;
+          }
+          if (response.ok) {
+            setIsUserCreated(true);
+          }
+
+          const token = await response.json();
+          localStorage.setItem(LS_KEY, token.jwt);
+          setUsername(data.username);
+        } catch (error) {
+          console.log("Try again later", error);
+        }
       }
-
-      const token = await response.json();
-      localStorage.setItem(LS_KEY, token.jwt);
-      setUsername(data.username);
     } catch (error) {
-      console.log("Try again later", error);
+      console.error("Error creating user:", error);
     }
   };
 
@@ -87,23 +110,32 @@ const NewUser = () => {
           <input
             type="text"
             name="name"
+            placeholder="Name"
             value={user.name}
             onChange={handleName}
           />
+          {usernameNotavailableError && (
+            <span className="error-msg">{usernameNotavailableError} </span>
+          )}
+          {userError && <span className="error-msg">{userError} </span>}
           <label>Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
+            placeholder="Password"
             value={user.password}
             onChange={handlePassword}
           />
+          {passwordError && <span className="error-msg">{passwordError} </span>}
           <label>Image</label>
           <input
             type="text"
             name="image"
+            placeholder="Image"
             value={user.image}
             onChange={handleImage}
           />
+          {imageError && <span className="error-msg">{imageError} </span>}
           <button className="create-btn" onClick={handleCreateUser}>
             Create new user
           </button>

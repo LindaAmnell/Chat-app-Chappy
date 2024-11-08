@@ -5,9 +5,7 @@ import { useEffect } from "react";
 import { searchUser } from "../data/APIFunctions/searchUser.ts";
 import chappyDragon from "../images/little-cute-cartoon-dragon-chappy.png";
 import { CgProfile } from "react-icons/cg";
-
 import { ProfileSettings } from "./ProfileSettings.tsx";
-
 const Header = () => {
   const {
     username,
@@ -18,7 +16,7 @@ const Header = () => {
     toggleProfileSettings,
   } = useStore();
 
-  const handelUser = async () => {
+  const handleUser = async () => {
     if (username !== "Guest") {
       const activeUserName = await getActiveUser();
       if (activeUserName) {
@@ -35,6 +33,7 @@ const Header = () => {
       }
     }
   };
+
   const handelProfile = () => {
     if (username !== "Guest") {
       toggleProfileSettings(true);
@@ -49,7 +48,7 @@ const Header = () => {
         return;
       }
     }
-    handelUser();
+    handleUser();
   }, []);
 
   return (
@@ -61,7 +60,9 @@ const Header = () => {
         ) : (
           <CgProfile className="profile-image-icon" />
         )}
-        {isProfileSettingsVisible && <ProfileSettings />}
+        {isProfileSettingsVisible && (
+          <ProfileSettings handleUsers={handleUser} />
+        )}
         {username && <p className="sign-in-name">{username}</p>}
         <p onClick={handelProfile} className="icon">
           ⚙️

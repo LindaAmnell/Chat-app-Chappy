@@ -1,6 +1,5 @@
 import "../css/chatApp.css";
 import { useEffect, useCallback } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../data/storeHooks.ts";
 import { getRooms } from "../data/APIFunctions/getRooms.ts";

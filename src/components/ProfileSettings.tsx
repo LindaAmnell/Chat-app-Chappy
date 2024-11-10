@@ -1,3 +1,4 @@
+import "../css/header.css";
 import { useEffect, useState } from "react";
 import { getActiveUser } from "../data/APIFunctions/getActiveUser.ts";
 import { searchUser } from "../data/APIFunctions/searchUser.ts";

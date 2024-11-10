@@ -1,3 +1,32 @@
+:root {
+  --text-color: white;
+  --background-color: hsl(147, 18%, 70%);
+  --button-color: #618e75;
+  --header-text: "Londrina Shadow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  --text: "Love Ya Like A Sister", cursive;
+  font-style: normal;
+  --div-color: hsl(148, 21%, 57%);
+  --back-color-div: hsl(145, 17%, 56%);
+  --input-color-dm: #c3d8cc;
+  --box-color: hsla(158, 88%, 30%, 1);
+  background-image: radial-gradient(
+      at 20% 39%,
+      hsla(155, 50%, 38%, 0.57) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 63% 14%, hsla(155, 40%, 41%, 1) 0px, transparent 50%),
+    radial-gradient(at 40% 39%, hsla(155, 74%, 38%, 1) 0px, transparent 50%),
+    radial-gradient(at 43% 90%, rgb(67, 182, 134) 0px, transparent 50%),
+    radial-gradient(at 54% 25%, hsla(155, 46%, 52%, 1) 0px, transparent 50%),
+    radial-gradient(at 57% 56%, rgb(56, 164, 119) 0px, transparent 50%),
+    radial-gradient(at 83% 48%, hsla(155, 56%, 37%, 1) 0px, transparent 50%),
+    radial-gradient(at 85% 39%, hsla(151, 79%, 37%, 1) 0px, transparent 50%),
+    radial-gradient(at 77% 87%, rgb(48, 144, 98) 0px, transparent 50%),
+    radial-gradient(at 80% 72%, hsla(156, 51%, 38%, 1) 0px, transparent 50%);
+}
+
 .chappy-chat-page {
   height: 3em;
   margin-left: 0.5em;
@@ -79,7 +108,7 @@ header {
 h3 {
   margin-top: 0em;
 }
-.delet-section {
+.delete-section {
   position: fixed;
   top: 45%;
   left: 50%;

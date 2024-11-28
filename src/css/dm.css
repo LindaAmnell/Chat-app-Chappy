@@ -148,7 +148,7 @@
 }
 @media (min-width: 600px) {
   .messages-container {
-    min-height: 500px;
+    min-height: 450px;
     max-width: 600px;
     margin: auto;
     min-width: 600px;
